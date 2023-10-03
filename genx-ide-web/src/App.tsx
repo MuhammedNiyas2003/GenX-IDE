@@ -1,13 +1,9 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
+import router from "./router";
 
 function App() {
-  return (
-    <>
-      <h1 className="tape">
-        <span>GenX IDE (Under Construction)</span>
-      </h1>
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
