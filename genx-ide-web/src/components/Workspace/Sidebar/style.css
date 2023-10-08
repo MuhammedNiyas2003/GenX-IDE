@@ -1,0 +1,9 @@
+.sidebar-wrapper {
+  width: 70px;
+  height: 100vh;
+  background-color: lightcoral;
+}
+p {
+  text-decoration: none;
+  color: white;
+}
