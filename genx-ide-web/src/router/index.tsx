@@ -14,6 +14,8 @@ import Register from "../pages/RegisterPage";
 import Explore from "../pages/ExplorePage";
 import CreateProject from "../pages/CreateProject";
 import Workspace from "../pages/WorkspacePage";
+import APITesting from "../pages/APITesting";
+import Drawer from "../pages/Drawer";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,6 +29,8 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/workspace" element={<AuthenticatedLayout />}>
         <Route path="" element={<CreateProject />} />
+        <Route path="api-testing" element={<APITesting />} />
+        <Route path="drawer" element={<Drawer />} />
         <Route path="project" element={<Workspace />}>
           <Route path=":projectId" element={<Workspace />} />
         </Route>

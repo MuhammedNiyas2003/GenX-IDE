@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
+import Sidebar from "../components/Workspace/Sidebar";
 
 const AuthenticatedLayout = () => {
   return (
-    <>
-      <h2>AuthenticatedLayout</h2>
+    <div style={{ display: "flex", backgroundColor: "grey", width: "100vw" }}>
+      <Sidebar />
       <Outlet />
-    </>
+    </div>
   );
 };
 
