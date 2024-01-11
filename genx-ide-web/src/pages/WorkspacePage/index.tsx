@@ -3,11 +3,15 @@ import Editor from "../../components/Workspace/Editor";
 import Explorer from "../../components/Workspace/Explorer";
 import Split from "react-split";
 import "./style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Workspace = () => {
   const [isDragging, setIsDragging] = useState<boolean>(false);
-  
+
+  useEffect(() => {
+    console.log(isDragging);
+  }, [isDragging]);
+
   return (
     <div className="workspace-container">
       <Split
@@ -17,7 +21,7 @@ const Workspace = () => {
         className="main-split"
       >
         <Explorer />
-        <Editor/>
+        <Editor />
       </Split>
     </div>
   );
