@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import './style.css'
+import "./style.scss";
+import InputBox from "../../components/Form/InputBox";
 
 const Login = () => {
   return (
@@ -13,13 +14,14 @@ const Login = () => {
       </Link>
       <div className="login-container">
         <div className="login-card">
-          <label>Email</label>
-          <input type="email" placeholder="Enter your email" className="login-input"/>
-          <label>Password</label>
-          <input type="password" placeholder="Password" className="login-input"/>
+          <InputBox
+            label="Your Email"
+            placeholder="Enter your email"
+            type="email"
+          />
+          <InputBox label="Password" placeholder="password" type="password" />
           <button className="login-btn">Sign In</button>
           <h6 className="login-or-divider">OR</h6>
-         
         </div>
       </div>
     </div>
