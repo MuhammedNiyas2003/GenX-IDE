@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.scss";
 
 const Explorer = () => {
   return <div className="explorer-wrapper">Explorer</div>;

@@ -19,6 +19,7 @@ const Workspace = () => {
         onDragEnd={() => setIsDragging(false)}
         gutterSize={1}
         className="main-split"
+        sizes={[15, 80]}
       >
         <Explorer />
         <Editor />

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import  './style.scss'
+import "./style.scss";
+import InputBox from "../../components/Form/InputBox";
 const Register = () => {
   return (
     <div>
@@ -7,20 +8,25 @@ const Register = () => {
       <Link to="/login">
         <button>Login</button>
       </Link>
-      <div className="register-container">
-        <div className="register-card">
-          <label>Email</label>
-          <input type="email" placeholder="Enter your email" className="register-input"/>
-          <label>Full Name</label>
-          <input type="text" placeholder="Enter your name" className="register-input"/>
-          <label>Password</label>
-          <input type="password" placeholder="Password" className="register-input"/>
-          <button className="register-btn">Sign Up</button>
-         
+      <div className="login-container">
+        <div className="login-card">
+          <InputBox
+            label="Your Email"
+            placeholder="Enter your email"
+            type="email"
+          />
+          <InputBox
+            label="Username"
+            placeholder="Enter your username"
+            type="text"
+          />
+          <InputBox label="Password" placeholder="password" type="password" />
+          <button className="login-btn">Sign In</button>
+          <h6 className="login-or-divider">OR</h6>
         </div>
+      </div>
     </div>
-    </div>
-  );    
+  );
 };
 
 export default Register;
