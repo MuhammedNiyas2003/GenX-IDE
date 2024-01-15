@@ -31,6 +31,7 @@ const submitCode = async (req, res) => {
             status,
             output: statusResponse.data.output,
             error: statusResponse.data.rntError,
+            code
           };
           console.log("Compilation completed:", compileResponse);
           res.json({ compileResponse });
