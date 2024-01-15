@@ -6,7 +6,7 @@ import "./style.css";
 import { useEffect, useState } from "react";
 
 const Workspace = () => {
-  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     console.log(isDragging);

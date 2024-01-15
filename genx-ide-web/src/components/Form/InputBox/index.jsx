@@ -1,11 +1,6 @@
 import "./style.scss";
 
-interface Props {
-  label: string;
-  type: string;
-  placeholder: string;
-}
-const InputBox = ({ label, type, placeholder }: Props) => {
+const InputBox = ({ label, type, placeholder }) => {
   return (
     <div className="input-box-container">
       <div className="label-container">
