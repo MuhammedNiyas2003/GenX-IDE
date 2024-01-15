@@ -6,15 +6,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 
-// import authRouter from "./routes/auth.js";
-// import productRouter from "./routes/product.js";
-// import orderRouter from "./routes/order.js";
-// import stripeRouter from "./routes/stripe.js";
-
-// import colorRouter from "./routes/color.js";
-// import sizeRouter from "./routes/size.js";
-// import categoryRouter from "./routes/category.js";
-// import reviewRouter from "./routes/review.js";
+import compilerRouter from "./routes/compiler.js";
 
 const app = express();
 
@@ -28,18 +20,11 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.get("/", async (req, res) => {
-  res.send("MNMLFM backend");
+  res.send("GenX backend");
 });
 
-// app.use("/api/auth", authRouter);
-// app.use("/api/products", productRouter);
-// app.use("/api/category", categoryRouter);
-// app.use("/api/payment", stripeRouter);
-// app.use("/api/order", orderRouter);
-// //admin || dashboard
-// app.use("/api/color", colorRouter);
-// app.use("/api/size", sizeRouter);
-// app.use("/api/review", reviewRouter);
+//routes
+app.use("/api/compiler", compilerRouter);
 
 //db connection
 mongoose.set("strictQuery", true);

@@ -1,45 +1,30 @@
 import axios from "axios";
 import "./style.scss";
-import { useEffect } from "react";
+import { useState } from "react";
 
 const Compiler = () => {
-  useEffect(() => {
-    const compiler = async () => {
-      try {
-        // Request body
-        const requestBody = {
-          code: "let a = 'faris'; console.log(a)",
-          input: "",
-          language: "js",
-          save: false,
-        };
+  const [code, setCode] = useState("let a = 'faris'; console.log(a);");
+  const [isCompiling, setIsCompiling] = useState(false);
+  const [output, setOutput] = useState("");
 
-        // Request headers
-        const requestHeaders = {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": "true",
-          "Access-Control-Allow-Headers": "content-type",
-        };
+  const compileCode = async () => {
+    setIsCompiling(true);
+    const response = await axios.post(
+      "http://localhost:3001/api/compiler/submit-code",
+      { code }
+    );
+    setIsCompiling(false);
+    console.log(response.data);
+    setOutput(response.data.compileResponse.output);
+  };
 
-        const res = await axios.post(
-          "https://codejudge.geeksforgeeks.org/submit-request",
-          requestBody,
-          {
-            headers: requestHeaders,
-          }
-        );
-
-        console.log(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    compiler();
-  }, []);
-
-  return <div className="compiler-container">index</div>;
+  return (
+    <div className="compiler-container">
+      <button onClick={compileCode}>compiler code</button>
+      {isCompiling && <p style={{ color: "black" }}>compiling...</p>}
+      <p style={{ color: "black" }}>output : {output}</p>
+    </div>
+  );
 };
 
 export default Compiler;
