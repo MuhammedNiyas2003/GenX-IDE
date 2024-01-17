@@ -1,29 +1,29 @@
 @import "../../styles/colors.scss";
-.register-container{
+
+.register-container {
   width: 100%;
   height: 100vh;
-  background-color:$primary;
+  background-color: $primary;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-.register-card{
-  width: 300px; 
+.register-card {
+  width: 300px;
   height: 400px;
-  background-color:blue;
+  background-color: blue;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.register-btn{
+.register-btn {
   width: 60px;
   height: 25px;
   margin-top: 10px;
-
 }
-.register-input{
+.register-input {
   width: 80%;
   height: 25px;
   margin-top: 5px;
@@ -31,5 +31,6 @@
   outline: none;
   border: none;
   border-radius: 3px;
-  padding-left: 5px   ;
+  padding-left: 5px;
 }
+

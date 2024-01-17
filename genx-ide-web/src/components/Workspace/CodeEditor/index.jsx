@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./style.css";
 import Editor from "@monaco-editor/react";
 import { useDispatch } from "react-redux";
-import { setCurrentCode} from '../../../state/reducers/workspaceSlice.js'
+import { setCurrentCode } from "../../../state/reducers/workspaceSlice.js";
 
 const CodeEditor = () => {
   const [code, setCode] = useState("");

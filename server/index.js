@@ -7,6 +7,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import compilerRouter from "./routes/compiler.js";
+import authRouter from "./routes/auth.js";
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.get("/", async (req, res) => {
 
 //routes
 app.use("/api/compiler", compilerRouter);
+app.use("/api/auth", authRouter);
 
 //db connection
 mongoose.set("strictQuery", true);
