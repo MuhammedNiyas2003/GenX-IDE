@@ -1,0 +1,16 @@
+@import "../../styles/colors.scss";
+.btn-container {
+  padding: 9px 20px;
+  background-color: $blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  cursor: pointer;
+  &:hover{
+    opacity: .9;
+  }
+  p {
+    font-size: 13px;
+  }
+}

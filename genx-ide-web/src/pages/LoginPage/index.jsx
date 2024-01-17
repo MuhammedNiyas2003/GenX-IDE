@@ -8,6 +8,7 @@ import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../../state/reducers/authSlice.js";
+import Button from "../../components/Button/index.jsx";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -65,9 +66,7 @@ const Login = () => {
             value={password}
             setValue={setPassword}
           />
-          <button className="login-btn" onClick={loginHandler}>
-            Sign In
-          </button>
+          <Button onClick={loginHandler} />
           {isLoading && <p style={{ color: "#fff" }}>loading</p>}
           <h6 className="login-or-divider">OR</h6>
         </div>
