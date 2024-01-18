@@ -1,6 +1,23 @@
-@import '../../../styles/colors.scss';
+@import "../../../styles/colors.scss";
 .explorer-wrapper {
-    width: 200px;
-    height: 100vh;
-    background-color:$primary;
+  width: 200px;
+  height: 100vh;
+  background-color: $primary;
+  padding-left: 15px;
+  padding-top: 2rem;
+}
+
+.file,
+.folder-details {
+  margin-bottom: 14px;
+  padding-top: 5px;
+  padding-bottom: 3px;
+  &:hover{
+    background-color:$secondary;
+  }
+}
+.folder-name,.file-name{
+    color: $white;
+    font-size: 13px;
+    margin-left: 5px;
 }
