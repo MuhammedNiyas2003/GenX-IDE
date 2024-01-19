@@ -17,7 +17,7 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  //login
+  //email and password login
   const loginHandler = async () => {
     setIsLoading(true);
     try {
@@ -38,6 +38,16 @@ const Login = () => {
       console.log(error);
     } finally {
       setIsLoading(false);
+    }
+  };
+  //github + passport login
+  const githubLoginHandler = async () => {
+    try {
+      // Redirect the user to the GitHub login page on the server
+      window.location.href = "http://172.20.10.4:3001/api/auth/github";
+      // window.location.href = response.data.redirectUrl;
+    } catch (error) {
+      console.error("GitHub login failed:", error);
     }
   };
 
@@ -66,9 +76,10 @@ const Login = () => {
             value={password}
             setValue={setPassword}
           />
-          <Button onClick={loginHandler} />
+          <Button text="Sign In" onClick={loginHandler} />
           {isLoading && <p style={{ color: "#fff" }}>loading</p>}
           <h6 className="login-or-divider">OR</h6>
+          <Button text="Github" onClick={githubLoginHandler} />
         </div>
       </div>
     </div>

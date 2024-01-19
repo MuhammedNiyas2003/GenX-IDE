@@ -5,9 +5,15 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
+//auth
+import passport from "passport";
+import { Strategy as GitHubStrategy } from "passport-github2";
 
+//routes
 import compilerRouter from "./routes/compiler.js";
 import authRouter from "./routes/auth.js";
+// models
+import User from "./models/User.js";
 
 const app = express();
 
@@ -19,9 +25,51 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+app.use(passport.initialize());
 
 app.get("/", async (req, res) => {
   res.send("GenX backend");
+});
+//auth
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: `${process.env.SERVER_URL}/api/auth/github/callback`,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let user = await User.findOne({ githubId: profile.id });
+
+        if (!user) {
+          // If user doesn't exist, create a new one
+          user = new User({
+            username: profile.username,
+            githubId: profile.id,
+          });
+          await user.save();
+        }
+
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    }
+  )
+);
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error);
+  }
 });
 
 //routes

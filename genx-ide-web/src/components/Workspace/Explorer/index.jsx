@@ -103,6 +103,26 @@ function Explorer() {
             name: "components.js",
             type: "file",
           },
+          {
+            name: "components.js",
+            type: "file",
+          },
+          {
+            name: "components.js",
+            type: "file",
+          },
+          {
+            name: "components.js",
+            type: "file",
+          },
+          {
+            name: "components.js",
+            type: "file",
+          },
+          {
+            name: "components.js",
+            type: "file",
+          },
         ],
       },
     ],

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./style.scss";
 import InputBox from "../../components/Form/InputBox";
+import Button from "../../components/Button/index"
 const Register = () => {
   return (
     <div>
@@ -21,7 +22,7 @@ const Register = () => {
             type="text"
           />
           <InputBox label="Password" placeholder="password" type="password" />
-          <button className="login-btn">Sign In</button>
+          <Button/>
           <h6 className="login-or-divider">OR</h6>
         </div>
       </div>
