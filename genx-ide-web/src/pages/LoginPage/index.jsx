@@ -27,7 +27,7 @@ const Login = () => {
       };
       console.log(formData);
       const loginResponse = await axios.post(
-        "http://localhost:3001/api/auth/login",
+        `${import.meta.env.VITE_SERVER_URL}/api/auth/login`,
         formData
       );
       const { status, user, token } = loginResponse.data;
@@ -44,7 +44,9 @@ const Login = () => {
   const githubLoginHandler = async () => {
     try {
       // Redirect the user to the GitHub login page on the server
-      window.location.href = "http://172.20.10.4:3001/api/auth/github";
+      window.location.href = `${
+        import.meta.env.VITE_SERVER_URL
+      }/api/auth/github`;
       // window.location.href = response.data.redirectUrl;
     } catch (error) {
       console.error("GitHub login failed:", error);
