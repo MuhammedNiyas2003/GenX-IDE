@@ -14,6 +14,7 @@ import compilerRouter from "./routes/compiler.js";
 import authRouter from "./routes/auth.js";
 // models
 import User from "./models/User.js";
+import session from "express-session";
 
 const app = express();
 
@@ -25,7 +26,9 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/", async (req, res) => {
   res.send("GenX backend");
