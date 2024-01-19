@@ -17,6 +17,7 @@ router.get(
   (req, res) => {
     console.log("callback");
     // Redirect or respond as needed
+    console.log(req, res);
     res.redirect("/");
   }
 );
