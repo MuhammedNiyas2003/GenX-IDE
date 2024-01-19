@@ -14,7 +14,7 @@ import compilerRouter from "./routes/compiler.js";
 import authRouter from "./routes/auth.js";
 // models
 import User from "./models/User.js";
-import session from "express-session";
+import session from "cookie-session";
 
 const app = express();
 
