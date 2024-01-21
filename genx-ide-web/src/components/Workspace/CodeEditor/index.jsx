@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./style.css";
 import Editor from "@monaco-editor/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,12 +8,12 @@ const CodeEditor = () => {
   const dispatch = useDispatch();
 
   function onCodeChange(value) {
-    console.log(value);
     dispatch(setCurrentCode(value));
   }
   return (
     <Editor
-      height="90vh"
+      height="100vh"
+      width="100%"
       defaultLanguage="javascript"
       onChange={onCodeChange}
       defaultValue={currentCode}

@@ -18,6 +18,7 @@ import APITesting from "../pages/APITesting";
 import Drawer from "../pages/Drawer";
 import AuthRoute from "../utils/AuthRoute";
 import ProtectedRoute from "../utils/ProtectedRoute";
+import Music from "../pages/Music/Index";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
         <Route path="" element={<CreateProject />} />
         <Route path="api-testing" element={<APITesting />} />
         <Route path="drawer" element={<Drawer />} />
+        <Route path="music" element={<Music />} />
         <Route path="project" element={<Workspace />}>
           <Route path=":projectId" element={<Workspace />} />
         </Route>
