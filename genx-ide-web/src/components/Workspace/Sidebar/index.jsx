@@ -15,6 +15,7 @@ const Sidebar = () => {
         <NavLink
           to={item.path}
           className={({ isActive }) => (isActive ? "active" : "")}
+          key={item.id}
         >
           <div className="sidebar-item">
             <img className="sidebar-icon" src={item.icon} alt="" />
