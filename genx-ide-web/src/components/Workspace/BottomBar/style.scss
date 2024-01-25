@@ -1,0 +1,9 @@
+@import "../../../styles/colors.scss";
+.bottombar-container{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background-color:$secondary;
+    z-index: 999;
+}

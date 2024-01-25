@@ -1,0 +1,26 @@
+@import "../../../styles/colors.scss";
+.explorer-wrapper {
+  width: 200px;
+  height: 100vh;
+  background-color: $primary;
+  padding-left: 15px;
+  padding-top: 2rem;
+  overflow: scroll;
+}
+
+.file,
+.folder-details {
+  margin-bottom: 14px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 5px;
+  padding-left: 10px;
+  &:hover{
+    background-color:$secondary;
+  }
+}
+.folder-name,.file-name{
+    color: $white;
+    font-size: 13px;
+    margin-left: 5px;
+}

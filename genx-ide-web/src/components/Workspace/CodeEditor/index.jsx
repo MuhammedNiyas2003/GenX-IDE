@@ -1,22 +1,25 @@
-import { useEffect, useRef } from "react";
 import "./style.css";
-import * as monaco from "monaco-editor";
+import Editor from "@monaco-editor/react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentCode } from "../../../state/reducers/workspaceSlice.js";
 
 const CodeEditor = () => {
-  const editorRef = useRef(null);
-  useEffect(() => {
-    const editor = monaco.editor.create(editorRef.current, {
-      value: 'function hello() {\n\tconsole.log("Hello, Monaco Editor!");\n}',
-      language: "javascript",
-      theme: "vs-dark",
-    });
+  const { currentCode } = useSelector(state=>state.workspace)
+  const dispatch = useDispatch();
 
-    return () => {
-      editor.dispose();
-    };
-  }, []);
-
-  return <div id="editor" ref={editorRef} style={{ height: "100%" }}></div>;
+  function onCodeChange(value) {
+    dispatch(setCurrentCode(value));
+  }
+  return (
+    <Editor
+      height="100vh"
+      width="100%"
+      defaultLanguage="javascript"
+      onChange={onCodeChange}
+      defaultValue={currentCode}
+      theme="vs-dark"
+    />
+  );
 };
 
 export default CodeEditor;

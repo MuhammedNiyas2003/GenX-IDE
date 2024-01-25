@@ -1,0 +1,30 @@
+@import "../../../styles/colors.scss";
+.rightbar-container {
+  position: fixed;
+  right: 0;
+  height: 100%;
+  width: 300px;
+  background-color: $secondary;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video-items{
+    width: 100%;
+    margin-top:1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .video-item{
+        width: 90%;
+        aspect-ratio: 1.3;
+        margin: 5px;
+        background:grey;
+        border-radius: 8px;
+    }
+}
+.make-video-container{
+    width: 90%;
+}
