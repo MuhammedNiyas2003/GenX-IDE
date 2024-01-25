@@ -1,6 +1,8 @@
+import ProjectList from "../../components/Explore/ProjectList"
+
 const Explore = () => {
   return (
-    <div>ExplorePage</div>
+    <div><ProjectList/></div>
   )
 }
 
