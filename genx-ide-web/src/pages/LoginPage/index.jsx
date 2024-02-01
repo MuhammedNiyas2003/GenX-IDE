@@ -8,7 +8,7 @@ import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../../state/reducers/authSlice.js";
-import Button from "../../components/Button/index.jsx";
+import { Button } from "@adobe/react-spectrum";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -78,10 +78,13 @@ const Login = () => {
             value={password}
             setValue={setPassword}
           />
-          <Button text="Sign In" onClick={loginHandler} />
-          {isLoading && <p style={{ color: "#fff" }}>loading</p>}
+          <Button isPending={isLoading} onClick={loginHandler} variant="accent">
+            Sign In
+          </Button>
           <h6 className="login-or-divider">OR</h6>
-          <Button text="Github" onClick={githubLoginHandler} />
+          <Button onClick={githubLoginHandler} variant="accent">
+            Github
+          </Button>
         </div>
       </div>
     </div>

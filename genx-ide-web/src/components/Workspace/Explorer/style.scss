@@ -6,6 +6,7 @@
   padding-left: 15px;
   padding-top: 2rem;
   overflow: scroll;
+  padding-bottom: 10rem;
 }
 
 .file,
@@ -15,12 +16,27 @@
   padding-bottom: 2px;
   border-radius: 5px;
   padding-left: 10px;
-  &:hover{
-    background-color:$secondary;
+  cursor: pointer;
+  &:hover {
+    background-color: $secondary;
   }
 }
-.folder-name,.file-name{
-    color: $white;
-    font-size: 13px;
-    margin-left: 5px;
+.folder {
+  // background-color:green;
+}
+.folder-contents {
+  // background-color: yellow;
+  display: none;
+}
+.show {
+  display: block;
+}
+.folder-details {
+  // background-color: red;
+}
+.folder-name,
+.file-name {
+  color: $white;
+  font-size: 13px;
+  margin-left: 5px;
 }

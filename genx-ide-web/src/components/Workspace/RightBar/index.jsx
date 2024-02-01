@@ -11,7 +11,7 @@ const RightBar = () => {
   const expandWindow = () => {
     const tl = gsap.timeline();
     tl.to(windowRef.current, {
-      width: windowRef.current.style.width === "300px" ? 60 : 300,
+      width: windowRef.current.style.width === "60px" ? 300 : 60,
       ease: "power1.inOut",
       duration: 0.2,
     });
@@ -133,9 +133,9 @@ const RightBar = () => {
         <Button text="Create" />
       </div>
       {/* <div className="video-items">
-        <div className="video-item"></div>
-        <div className="video-item"></div>
-        <div className="video-item"></div>
+        <div className="video-item">
+          
+        </div>
       </div> */}
       <div>
         <h1>Room Page</h1>

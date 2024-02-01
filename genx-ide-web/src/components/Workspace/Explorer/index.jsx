@@ -1,8 +1,9 @@
 import "./style.scss";
-
-import React from "react";
+import { useState } from "react";
 
 function FolderOrFile({ item, level = 0 }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   const getIndentation = (level) => {
     const spaces = level * 10;
     return `${spaces}px`;
@@ -13,11 +14,19 @@ function FolderOrFile({ item, level = 0 }) {
   if (item.type === "folder") {
     return (
       <div className="folder">
-        <div className="folder-details" style={{ paddingLeft: indentation }}>
+        <div
+          className="folder-details"
+          onClick={(prev) => setIsOpen(!isOpen)}
+          style={{ paddingLeft: indentation }}
+        >
           <span className="folder-icon">📁</span>
           <span className="folder-name">{item.name}</span>
         </div>
-        <div className="folder-contents">
+        <div
+          className={`${
+            item?.isRoot ? "folder-contents" : "folder-contents not-root"
+          } ${isOpen && "show"}`}
+        >
           {item.contents.map((subItem, index) => (
             <FolderOrFile key={index} item={subItem} level={level + 1} />
           ))}
@@ -42,6 +51,7 @@ function Explorer() {
   const jsonData = {
     name: "Genx Project",
     type: "folder",
+    isRoot: true,
     contents: [
       {
         name: "index.html",
@@ -100,27 +110,27 @@ function Explorer() {
             type: "file",
           },
           {
-            name: "components.js",
+            name: "app.js",
             type: "file",
           },
           {
-            name: "components.js",
+            name: "server.js",
             type: "file",
           },
           {
-            name: "components.js",
+            name: "example.js",
             type: "file",
           },
           {
-            name: "components.js",
+            name: "module.js",
             type: "file",
           },
           {
-            name: "components.js",
+            name: "login.js",
             type: "file",
           },
           {
-            name: "components.js",
+            name: "register.js",
             type: "file",
           },
         ],
