@@ -4,8 +4,14 @@ import { useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import socket from "../../utils/socket/socket.js";
 import InputBox from "../../components/Form/InputBox";
-// import Button from "../../components/Button";
-import { Item, TabList, TabPanels, Tabs, Button } from "@adobe/react-spectrum";
+import {
+  Item,
+  TabList,
+  TabPanels,
+  Tabs,
+  Button,
+  ActionButton,
+} from "@adobe/react-spectrum";
 
 const CreateProject = () => {
   const { email } = useSelector((state) => state.auth.user);
@@ -27,7 +33,18 @@ const CreateProject = () => {
     },
     [navigate]
   );
+  const generateCode = () => {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let code = "";
 
+    for (let i = 0; i < 8; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      code += characters.charAt(randomIndex);
+    }
+    setRoom(code);
+  };
+
+  //socket
   useEffect(() => {
     socket.on("room:join", handleJoinRoom);
     return () => {
@@ -35,13 +52,18 @@ const CreateProject = () => {
     };
   }, [socket, handleJoinRoom]);
 
+  //gen rooom code
+  useEffect(() => {
+    generateCode();
+  }, []);
+
   return (
     <div className="createproject-container">
       <div className="createproject-card">
         <Tabs aria-label="History of Ancient Rome">
           <TabList>
-            <Item key="FoR">Start a New Workspace</Item>
-            <Item key="MaR">Connect to Workspace</Item>
+            <Item key="new">Start a New Workspace</Item>
+            <Item key="connect">Connect to Workspace</Item>
           </TabList>
           <TabPanels
             marginTop={20}
@@ -51,7 +73,7 @@ const CreateProject = () => {
               flexDirection: "column",
             }}
           >
-            <Item key="FoR">
+            <Item key="new">
               <InputBox
                 label="Project name"
                 placeholder="Enter project name..."
@@ -70,16 +92,18 @@ const CreateProject = () => {
               />
               <InputBox
                 label="Enter WORKSPACE ID"
-                setValue={setRoom}
                 value={room}
                 placeholder="WORKSPACE ID"
                 type="text"
               />
+              <div className="generate-btn-container">
+                <ActionButton onClick={generateCode}>Refresh Code</ActionButton>
+              </div>
               <Button onClick={handleSubmitForm} variant="accent">
                 Create workspace
               </Button>
             </Item>
-            <Item key="MaR">
+            <Item key="connect">
               <InputBox
                 label="Your Email"
                 placeholder="Enter your email"
@@ -99,6 +123,21 @@ const CreateProject = () => {
             </Item>
           </TabPanels>
         </Tabs>
+      </div>
+      <div className="createproject-recent">
+        <h3>Recent</h3>
+        <p>
+          <span>students guard</span> - jan 23 2003
+        </p>
+        <p>
+          <span>students guard</span> - jan 23 2003
+        </p>
+        <p>
+          <span>students guard</span> - jan 23 2003
+        </p>
+        <p>
+          <span>students guard</span> - jan 23 2003
+        </p>
       </div>
     </div>
   );
