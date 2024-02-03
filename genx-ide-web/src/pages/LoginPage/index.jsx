@@ -78,7 +78,7 @@ const Login = () => {
             value={password}
             setValue={setPassword}
           />
-          <Button isPending={isLoading} onClick={loginHandler} variant="accent">
+          <Button isPending={isLoading} onPress={loginHandler} variant="accent">
             Sign In
           </Button>
           <h6 className="login-or-divider">OR</h6>
