@@ -15,16 +15,29 @@
       font-size: 12px;
     }
   }
-  input {
+  .input-box-input {
     width: 90%;
     height: 40px;
-    outline: none;
     border: none;
     background-color: $secondary;
     color: $lightGrey;
-    padding-left: 1rem;
     border-radius: 7px;
-    font-size: 12px;
+    
     border: 1px solid $darkGold;
+    display: flex;
+    overflow: hidden;
+    input{
+      outline: none;
+      border: none;
+      background-color:transparent;
+      // background-color:red;
+      height: 100%;
+      width: 100%;
+      padding-left: .6rem;
+      font-size: 11px;
+    }
+    .input-eye{
+      cursor: pointer;
+    }
   }
 }
