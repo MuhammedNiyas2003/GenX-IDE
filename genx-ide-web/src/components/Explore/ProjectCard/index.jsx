@@ -1,37 +1,27 @@
 import "./style.scss"
-import Button from '../../Button'
+import ProjectButton from "../ProjectButton"
 
 const ProjectCard = () => {
   return (
       <div className="projectcard-container">
       <div className="projectcard-header">
-        <div className="project-icon">
-          <img src="" alt="logo" />
+      <p>September 19th 2024</p>
+      <div className="projectcard-profile">
+        <img src="https://www.jamsadr.com/images/neutrals/person-donald-900x1080.jpg" alt="" />
+        <img src="https://www.jamsadr.com/images/neutrals/person-donald-900x1080.jpg" alt="" />
+        <img src="https://www.jamsadr.com/images/neutrals/person-donald-900x1080.jpg" alt="" />
+      </div>
+      </div>
+      <div className="projectcard-content">
+        <h3>Project Name</h3>
+        <p> elit. Eveniet quae error excepturi consequatur voluptatum modi suscipit repellat ipsum vitae dicta?</p>
+        <div className="projectcard-tags">
+          <p>testing of</p>
+          <p>the project</p>
+          <p>projectv test here</p>
         </div>
-        <div className="header-content">
-          <h5></h5>
-          <p>
-            name - date and time
-          </p>
-        </div>
-        <img className="save-btn" src="" alt="error" />
       </div>
-      <p className="projectcard-caption">description</p>
-      <div className="jobcard-tags">
-            <div>
-              <p>hello</p>
-            </div>
-      </div>
-      <p className="projectcard-caption">
-         days ego •Applicants
-      </p>
-      <div className="projectcard-bottom">
-        <h3>
-          10000
-          <span>/m</span>
-        </h3>
-        <Button/>
-      </div>
+      <ProjectButton></ProjectButton>
     </div>
   )
 }
