@@ -1,42 +1,49 @@
-@import "../../../styles/colors.scss";
-.explorer-wrapper {
-  width: 200px;
-  height: 100vh;
-  background-color: $primary;
-  padding-left: 15px;
-  padding-top: 2rem;
-  overflow: scroll;
-  padding-bottom: 10rem;
+.directory {
+  background: #242322;
+  font-family: monospace;
+  font-size: 14px;
+  color: white;
+  user-select: none;
+  padding: 20px;
+  height: 100%;
+  font-weight: 400;
 }
 
-.file,
-.folder-details {
-  margin-bottom: 14px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  border-radius: 5px;
-  padding-left: 10px;
+.directory .tree,
+.directory .tree-node,
+.directory .tree-node-group {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.directory .tree-branch-wrapper,
+.directory .tree-node__leaf {
+  outline: none;
+  outline: none;
+}
+
+.directory .tree-node {
   cursor: pointer;
-  &:hover {
-    background-color: $secondary;
-  }
 }
-.folder {
-  // background-color:green;
+
+.directory .tree-node:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
-.folder-contents {
-  // background-color: yellow;
-  display: none;
+
+.directory .tree .tree-node--focused {
+  background: rgba(255, 255, 255, 0.2);
 }
-.show {
+
+.directory .tree .tree-node--selected {
+  background: rgba(48, 107, 176);
+}
+
+.directory .tree-node__branch {
   display: block;
 }
-.folder-details {
-  // background-color: red;
-}
-.folder-name,
-.file-name {
-  color: $white;
-  font-size: 13px;
-  margin-left: 5px;
+
+.directory .icon {
+  vertical-align: middle;
+  padding-right: 5px;
 }
