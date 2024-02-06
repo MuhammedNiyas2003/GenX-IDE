@@ -1,9 +1,18 @@
 @import "../../../styles/colors.scss";
-.bottombar-container{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 30px;
-    background-color:$secondary;
-    z-index: 999;
+.bottombar-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: $secondary;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cH0MeW_spectrum-Popover-tip {
+  display: none;
+}
+.cH0MeW_spectrum-Popover {
+  border: none !important;
 }
