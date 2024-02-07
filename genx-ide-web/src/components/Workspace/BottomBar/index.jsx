@@ -3,6 +3,7 @@ import Button from "../../Button";
 import "./style.scss";
 // redux
 import { setLogout } from "../../../state/reducers/authSlice";
+import { setLogout as setLogoutSpotify } from "../../../state/reducers/spotifySlice";
 //spectrum
 import {
   DialogTrigger,
@@ -16,12 +17,14 @@ import {
   AlertDialog,
 } from "@adobe/react-spectrum";
 import Spotify from "../../Spotify";
+import { spotifyIcon } from "../../../contants/icons";
 
 const BottomBar = () => {
   const { loggedIn } = useSelector((state) => state.spotify);
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(setLogout());
+    dispatch(setLogoutSpotify());
   };
 
   const spotifyLoginHandler = () => {
@@ -50,7 +53,8 @@ const BottomBar = () => {
         {loggedIn ? (
           <DialogTrigger type="popover" placement="top" containerPadding={20}>
             <ActionButton staticColor="white" isQuiet>
-              spotify
+            <img className="spotify-icon" src={spotifyIcon} alt="spotify" />{" "}
+              <p className="spotify-connect-text">Play Music</p>
             </ActionButton>
             <Dialog
               UNSAFE_style={{ backgroundColor: "#212329", border: "none" }}
@@ -65,21 +69,42 @@ const BottomBar = () => {
         ) : (
           <DialogTrigger>
             <ActionButton staticColor="white" isQuiet>
-              connect spotify
+              <img className="spotify-icon" src={spotifyIcon} alt="spotify" />{" "}
+              <p className="spotify-connect-text">Connect spotify</p>
             </ActionButton>
             <AlertDialog
-              variant="information"
-              title="Connect your Spofity"
-              primaryActionLabel="Sign In"
+              variant="confirmation"
+              title="Connect your Spofity..."
+              primaryActionLabel="Open Spotify"
               cancelLabel="Cancel"
               onPrimaryAction={() => spotifyLoginHandler()}
             >
-              Please connect an existing account to sync any new files.
+              Connect your spotify account ( The spotify account should be added to the dashboard and premium ⚠️ )
             </AlertDialog>
           </DialogTrigger>
         )}
       </div>
-      <div className="bottombar-details"></div>
+      <div className="bottombar-details">
+        <div className="bottombar-users">
+          <img
+            src="https://astrotalk.com/astrology-blog/wp-content/uploads/2023/08/istockphoto-1040964930-612x612-1.jpg"
+            alt=""
+          />
+        </div>
+        <div className="bottombar-users">
+          <img
+            src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg"
+            alt=""
+          />
+          "
+        </div>
+        <div className="bottombar-users">
+          <img
+            src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
   );
 };

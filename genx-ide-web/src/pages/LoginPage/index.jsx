@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {  redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import "./style.scss";
 //components
 import InputBox from "../../components/Form/InputBox";
@@ -54,31 +54,38 @@ const Login = () => {
   };
 
   return (
-      <div className="login-container">
-        <div className="login-card">
-          <InputBox
-            label="Your Email"
-            placeholder="Enter your email"
-            type="email"
-            value={email}
-            setValue={setEmail}
-          />
-          <InputBox
-            label="Password"
-            placeholder="password"
-            type="password"
-            value={password}
-            setValue={setPassword}
-          />
-          <Button isPending={isLoading} onPress={loginHandler} variant="accent">
-            Sign In
-          </Button>
-          <h6 className="login-or-divider">OR</h6>
-          <Button onClick={githubLoginHandler} variant="accent">
-            Github
-          </Button>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-welcome">
+          <h3>Welcome back</h3>
+          <p>Sign in to your account</p>
         </div>
+        <InputBox
+          label="Your Email"
+          placeholder="Enter your email"
+          type="email"
+          value={email}
+          setValue={setEmail}
+        />
+        <InputBox
+          label="Password"
+          placeholder="Password"
+          type="password"
+          value={password}
+          setValue={setPassword}
+        />
+        <div className="forgotpassword-container">
+          <p>Forgot password?</p>
+        </div>
+        <Button isPending={isLoading} onPress={loginHandler} variant="accent">
+          Sign In
+        </Button>
+        <h6 className="login-or-divider">OR</h6>
+        <Button onClick={githubLoginHandler} variant="accent">
+          Github
+        </Button>
       </div>
+    </div>
   );
 };
 

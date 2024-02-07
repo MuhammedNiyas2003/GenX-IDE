@@ -9,10 +9,48 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 3rem;
 }
 .cH0MeW_spectrum-Popover-tip {
   display: none;
 }
 .cH0MeW_spectrum-Popover {
   border: none !important;
+}
+.bottombar-details {
+  height: 100%;
+  width: 100px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  // background-color:red;
+  &:hover .bottombar-users {
+    margin-left: 0;
+  }
+
+  .bottombar-users {
+    height: 90%;
+    aspect-ratio: 1;
+    background-color: grey;
+    border-radius: 50%;
+    border: 2px solid $primary;
+    margin-left: -7px;
+    transition: all 0.2s ease-in;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.spotify-icon {
+  width: 15px;
+  object-fit: contain;
+  margin-right: .5rem;
+}
+.spotify-connect-text{
+  font-size: 14px;
+  color: grey;
 }

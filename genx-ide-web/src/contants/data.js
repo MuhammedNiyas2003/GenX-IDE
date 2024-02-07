@@ -12,6 +12,6 @@ export const navlinks = [
   {
     id: "03",
     name: "About",
-    route: "/explore",
+    route: "/about",
   },
 ];

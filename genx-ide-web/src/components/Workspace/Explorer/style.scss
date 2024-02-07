@@ -1,5 +1,6 @@
+@import "../../../styles/colors.scss";
 .directory {
-  background: #242322;
+  background: $primary;
   font-family: monospace;
   font-size: 14px;
   color: white;

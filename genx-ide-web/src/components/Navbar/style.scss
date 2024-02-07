@@ -1,5 +1,5 @@
 @import "../../styles/colors.scss";
-.navbar-container{
+.navbar-container {
   width: 100%;
   height: 40px;
   background-color: $primary;
@@ -9,12 +9,27 @@
   justify-content: space-between;
   border-bottom: 1px solid $secondary;
 }
-.navlink{
-  transition: color .2s ease-in;
-  &:hover{
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+.navlink {
+  transition: color 0.2s ease-in;
+  &:hover {
     color: white !important;
   }
 }
-.isActive{
-  color:white !important;
+.isActive {
+  color: white !important;
+}
+.navbar-logo {
+  cursor: pointer;
+  margin-right: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 50px;
+    object-fit: contain;
+  }
 }

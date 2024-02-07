@@ -11,8 +11,12 @@ const spotifySlice = createSlice({
       state.token = action.payload.token;
       state.loggedIn = true;
     },
+    setLogout: (state, action) => {
+      state.token = "";
+      state.loggedIn = false;
+    },
   },
 });
 
-export const { setAccessToken } = spotifySlice.actions;
+export const { setAccessToken, setLogout } = spotifySlice.actions;
 export default spotifySlice.reducer;

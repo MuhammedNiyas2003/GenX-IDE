@@ -97,9 +97,11 @@ const CreateProject = () => {
                 type="text"
               />
               <div className="generate-btn-container">
-                <ActionButton onPress={generateCode}>Refresh Code</ActionButton>
+                <Button variant="overBackground" onPress={generateCode}>
+                  Refresh Code
+                </Button>
               </div>
-              <Button onClick={(e) => handleSubmitForm(e)} variant="accent">
+              <Button onClick={handleSubmitForm} variant="accent">
                 Create workspace
               </Button>
             </Item>
@@ -117,7 +119,7 @@ const CreateProject = () => {
                 placeholder="WORKSPACE ID"
                 type="text"
               />
-              <Button onPress={handleSubmitForm} variant="accent">
+              <Button onClick={handleSubmitForm} variant="accent">
                 Connect
               </Button>
             </Item>

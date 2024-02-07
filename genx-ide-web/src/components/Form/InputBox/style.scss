@@ -22,22 +22,32 @@
     background-color: $secondary;
     color: $lightGrey;
     border-radius: 7px;
-    
+
     border: 1px solid $darkGold;
     display: flex;
     overflow: hidden;
-    input{
+    input {
       outline: none;
       border: none;
-      background-color:transparent;
+      background-color: transparent;
       // background-color:red;
       height: 100%;
       width: 100%;
-      padding-left: .6rem;
-      font-size: 11px;
+      padding-left: 0.6rem;
+      font-size: 12px;
     }
-    .input-eye{
+    .input-eye {
       cursor: pointer;
+      // background-color:red;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 15%;
+      user-select: none;
+      img {
+        width: 18px;
+        object-fit: contain;
+      }
     }
   }
 }
