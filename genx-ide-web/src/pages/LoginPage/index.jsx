@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, redirect } from "react-router-dom";
+import {  redirect } from "react-router-dom";
 import "./style.scss";
 //components
 import InputBox from "../../components/Form/InputBox";
@@ -54,14 +54,6 @@ const Login = () => {
   };
 
   return (
-    <div>
-      Login Page
-      <Link to="/workspace">
-        <button>workspace</button>
-      </Link>
-      <Link to="/explore">
-        <button>explore</button>
-      </Link>
       <div className="login-container">
         <div className="login-card">
           <InputBox
@@ -87,7 +79,6 @@ const Login = () => {
           </Button>
         </div>
       </div>
-    </div>
   );
 };
 
