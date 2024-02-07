@@ -1,12 +1,12 @@
 // router
 import { Outlet } from "react-router-dom";
 // comp
-import AuthHeader from "../components/AuthHeader";
+import Navbar from "../components/Navbar";
 
 const UnAuthenticatedLayout = () => {
   return (
     <>
-      <AuthHeader />
+      <Navbar />
       <Outlet />
     </>
   );

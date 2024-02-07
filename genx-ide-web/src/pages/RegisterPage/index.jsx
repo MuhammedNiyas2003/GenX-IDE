@@ -1,14 +1,9 @@
 import { Link } from "react-router-dom";
 import "./style.scss";
 import InputBox from "../../components/Form/InputBox";
-import Button from "../../components/Button/index"
+import { Button } from "@adobe/react-spectrum";
 const Register = () => {
   return (
-    <div>
-      Register
-      <Link to="/login">
-        <button>Login</button>
-      </Link>
       <div className="login-container">
         <div className="login-card">
           <InputBox
@@ -22,11 +17,12 @@ const Register = () => {
             type="text"
           />
           <InputBox label="Password" placeholder="password" type="password" />
-          <Button/>
+          <Button onClick={()=>{}} variant="accent">
+            Sign Up
+          </Button>
           <h6 className="login-or-divider">OR</h6>
         </div>
       </div>
-    </div>
   );
 };
 
