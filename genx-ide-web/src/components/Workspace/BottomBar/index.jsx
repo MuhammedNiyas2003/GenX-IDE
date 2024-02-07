@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../Button";
 import "./style.scss";
 // redux
@@ -15,21 +15,39 @@ import {
   ButtonGroup,
   AlertDialog,
 } from "@adobe/react-spectrum";
+import Spotify from "../../Spotify";
 
 const BottomBar = () => {
+  const { loggedIn } = useSelector((state) => state.spotify);
   const dispatch = useDispatch();
   const logoutHandler = () => {
     dispatch(setLogout());
   };
-  const isLogged = true;
+
+  const spotifyLoginHandler = () => {
+    const client_id = "af711a8074794d1cb9dcf724638c0123";
+    const redirect_uri = "http://localhost:5173/workspace";
+    const api_uri = "https://accounts.spotify.com/authorize";
+    const scope = [
+      "user-read-private",
+      "user-read-email",
+      "user-modify-playback-state",
+      "user-read-playback-state",
+      "user-read-currently-playing",
+      "user-read-recently-played",
+      "user-top-read",
+    ];
+    window.location.href = `${api_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope.join(
+      " "
+    )}&response_type=token&show_dialog=true`;
+  };
   return (
     <div className="bottombar-container">
       <div className="bottombar-user">
         <Button onClick={logoutHandler} text="Logout" />
-        hi
       </div>
       <div className="bottombar-music">
-        {isLogged ? (
+        {loggedIn ? (
           <DialogTrigger type="popover" placement="top" containerPadding={20}>
             <ActionButton staticColor="white" isQuiet>
               spotify
@@ -37,11 +55,11 @@ const BottomBar = () => {
             <Dialog
               UNSAFE_style={{ backgroundColor: "#212329", border: "none" }}
             >
-              {/* <Heading>The Heading</Heading>
+              <Heading>The Heading</Heading>
               <Divider />
               <Content>
-                <Text>This is a popover.</Text>
-              </Content> */}
+                <Spotify />
+              </Content>
             </Dialog>
           </DialogTrigger>
         ) : (
@@ -54,6 +72,7 @@ const BottomBar = () => {
               title="Connect your Spofity"
               primaryActionLabel="Sign In"
               cancelLabel="Cancel"
+              onPrimaryAction={() => spotifyLoginHandler()}
             >
               Please connect an existing account to sync any new files.
             </AlertDialog>

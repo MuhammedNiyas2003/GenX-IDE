@@ -99,7 +99,7 @@ const CreateProject = () => {
               <div className="generate-btn-container">
                 <ActionButton onPress={generateCode}>Refresh Code</ActionButton>
               </div>
-              <Button onPress={handleSubmitForm} variant="accent">
+              <Button onClick={(e) => handleSubmitForm(e)} variant="accent">
                 Create workspace
               </Button>
             </Item>

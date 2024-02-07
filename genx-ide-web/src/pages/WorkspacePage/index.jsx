@@ -9,6 +9,8 @@ import Explorer from "../../components/Workspace/Explorer";
 const Workspace = () => {
   const [isDragging, setIsDragging] = useState(false);
 
+  
+
   return (
     <>
       <Split
