@@ -30,9 +30,9 @@ const Compiler = () => {
   return (
     <div className="compiler-container">
       <button onClick={compileCode}>compiler code</button>
-      {isCompiling && <p style={{ color: "black" }}>compiling...</p>}
-      <p style={{ color: "black" }}>output : {output}</p>
-      <p style={{ color: "red" }}>error : {error}</p>
+      {isCompiling && <p>compiling...</p>}
+      <p>output : {output}</p>
+      <p>error : {error}</p>
     </div>
   );
 };
