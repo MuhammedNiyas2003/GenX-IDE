@@ -1,9 +1,15 @@
-import ProjectList from "../../components/Explore/ProjectList"
+// comp
+import Header from "../../components/Explore/Header";
+import ProjectList from "../../components/Explore/ProjectList";
+
 
 const Explore = () => {
   return (
-    <div><ProjectList/></div>
-  )
-}
+    <div>
+      <Header />
+      <ProjectList />
+    </div>
+  );
+};
 
-export default Explore
+export default Explore;

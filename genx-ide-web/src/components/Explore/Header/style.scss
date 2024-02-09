@@ -1,0 +1,13 @@
+@import "../../../styles/colors.scss";
+.header-container {
+  background-color: $primary;
+  width: 100%;
+  min-height: 10vh;
+  padding: 0 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .header-search-container{
+    width: 30%;
+  }
+}

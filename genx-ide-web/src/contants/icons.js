@@ -6,6 +6,7 @@ import musicIcon from "../assets/icons/sidebar/music.png";
 import showIcon from "../assets/icons/form/eye.png";
 import hideIcon from "../assets/icons/form/eye-crossed.png";
 import spotifyIcon from "../assets/icons/spotify/spotify.png";
+import searchIcon from "../assets/icons/form/search.png";
 
 export {
   docIcon,
@@ -15,6 +16,7 @@ export {
   showIcon,
   hideIcon,
   spotifyIcon,
+  searchIcon,
 };
 
 //logos

@@ -2,7 +2,15 @@ import { useState } from "react";
 import { hideIcon, showIcon } from "../../../contants/icons";
 import "./style.scss";
 
-const InputBox = ({ label, type, placeholder, value, setValue, RightItem }) => {
+const InputBox = ({
+  label,
+  type,
+  placeholder,
+  value,
+  setValue,
+  RightItem,
+  LeftIcon,
+}) => {
   const [isShown, setIsShown] = useState(true);
   const isPassword = type === "password";
 
@@ -26,6 +34,11 @@ const InputBox = ({ label, type, placeholder, value, setValue, RightItem }) => {
             ) : (
               <img src={hideIcon} alt="hide-password" />
             )}
+          </div>
+        )}
+        {LeftIcon && (
+          <div className="input-box-left-icon">
+            <img src={LeftIcon} alt="" />
           </div>
         )}
       </div>
