@@ -20,6 +20,7 @@ import AuthRoute from "../utils/AuthRoute";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import Music from "../pages/Music/Index";
 import AboutPage from "../pages/AboutPage";
+import Settings from "../pages/Settings"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,7 +51,7 @@ const router = createBrowserRouter(
         <Route path="" element={<CreateProject />} />
         <Route path="api-testing" element={<APITesting />} />
         <Route path="drawer" element={<Drawer />} />
-        <Route path="music" element={<Music />} />
+        <Route path="settings" element={<Settings />} />
         <Route path="project" element={<Workspace />}>
           <Route path=":projectId" element={<Workspace />} />
         </Route>
