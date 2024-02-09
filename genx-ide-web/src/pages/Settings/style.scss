@@ -1,0 +1,9 @@
+@import "../../styles/colors.scss";
+.settings-container {
+  width: 100%;
+  background-color: $primary;
+  .tabs-section {
+    padding: 0 5rem;
+    width: 60%;
+  }
+}

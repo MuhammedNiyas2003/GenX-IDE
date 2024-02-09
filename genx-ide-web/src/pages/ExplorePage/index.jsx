@@ -1,5 +1,5 @@
 // comp
-import Header from "../../components/Explore/Header";
+import Header from "../../components/Header/index";
 import ProjectList from "../../components/Explore/ProjectList";
 
 
