@@ -3,7 +3,7 @@
   position: fixed;
   right: 0;
   height: 100%;
-  width: 300px;
+  width: 60px;
   background-color: $secondary;
   z-index: 999;
   display: flex;
@@ -23,8 +23,6 @@
         margin: 5px;
         background:grey;
         border-radius: 8px;
+        overflow: hidden;
     }
-}
-.make-video-container{
-    width: 90%;
 }

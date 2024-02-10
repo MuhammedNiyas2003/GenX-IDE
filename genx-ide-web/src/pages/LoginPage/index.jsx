@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, redirect } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import "./style.scss";
 //components
 import InputBox from "../../components/Form/InputBox";
@@ -8,7 +8,7 @@ import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { setLogin } from "../../state/reducers/authSlice.js";
-import Button from "../../components/Button/index.jsx";
+import { Button } from "@adobe/react-spectrum";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -54,35 +54,36 @@ const Login = () => {
   };
 
   return (
-    <div>
-      Login Page
-      <Link to="/workspace">
-        <button>workspace</button>
-      </Link>
-      <Link to="/explore">
-        <button>explore</button>
-      </Link>
-      <div className="login-container">
-        <div className="login-card">
-          <InputBox
-            label="Your Email"
-            placeholder="Enter your email"
-            type="email"
-            value={email}
-            setValue={setEmail}
-          />
-          <InputBox
-            label="Password"
-            placeholder="password"
-            type="password"
-            value={password}
-            setValue={setPassword}
-          />
-          <Button text="Sign In" onClick={loginHandler} />
-          {isLoading && <p style={{ color: "#fff" }}>loading</p>}
-          <h6 className="login-or-divider">OR</h6>
-          <Button text="Github" onClick={githubLoginHandler} />
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-welcome">
+          <h3>Welcome back</h3>
+          <p>Sign in to your account</p>
         </div>
+        <InputBox
+          label="Your Email"
+          placeholder="Enter your email"
+          type="email"
+          value={email}
+          setValue={setEmail}
+        />
+        <InputBox
+          label="Password"
+          placeholder="Password"
+          type="password"
+          value={password}
+          setValue={setPassword}
+        />
+        <div className="forgotpassword-container">
+          <p>Forgot password?</p>
+        </div>
+        <Button isPending={isLoading} onPress={loginHandler} variant="accent">
+          Sign In
+        </Button>
+        <h6 className="login-or-divider">OR</h6>
+        <Button onClick={githubLoginHandler} variant="accent">
+          Github
+        </Button>
       </div>
     </div>
   );

@@ -29,14 +29,14 @@ const userLogin = async (req, res) => {
 
 // user register
 const userRegister = async (req, res) => {
-  const { name, email, password, imageUrl } = req.body;
+  const { username, email, password, imageUrl } = req.body;
 
   try {
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      name,
+      username,
       email,
       password: hashedPassword,
       imageUrl: imageUrl !== "" ? imageUrl : "",

@@ -1,17 +1,47 @@
+import { useState } from "react";
+import { hideIcon, showIcon } from "../../../contants/icons";
 import "./style.scss";
 
-const InputBox = ({ label, type, placeholder, value, setValue }) => {
+const InputBox = ({
+  label,
+  type,
+  placeholder,
+  value,
+  setValue,
+  RightItem,
+  LeftIcon,
+}) => {
+  const [isShown, setIsShown] = useState(true);
+  const isPassword = type === "password";
+
   return (
     <div className="input-box-container">
       <div className="label-container">
         <label>{label}</label>
       </div>
-      <input
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        type={type}
-        placeholder={placeholder}
-      />
+      <div className="input-box-input">
+        {RightItem && <RightItem />}
+        <input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          type={!isPassword ? type : isPassword && isShown && "password"}
+          placeholder={placeholder}
+        />
+        {isPassword && (
+          <div onClick={() => setIsShown(!isShown)} className="input-eye">
+            {isShown ? (
+              <img src={showIcon} alt="show-password" />
+            ) : (
+              <img src={hideIcon} alt="hide-password" />
+            )}
+          </div>
+        )}
+        {LeftIcon && (
+          <div className="input-box-left-icon">
+            <img src={LeftIcon} alt="" />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

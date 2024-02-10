@@ -6,7 +6,7 @@ const sidebarItem = [
   { id: "01", name: "Editor", path: "project/123", icon: docIcon },
   { id: "02", name: "Draw", path: "drawer", icon: drawIcon },
   { id: "03", name: "API", path: "api-testing", icon: apiIcon },
-  { id: "04", name: "Music", path: "music", icon: musicIcon },
+  { id: "04", name: "Settings", path: "settings", icon: musicIcon },  
 ];
 const Sidebar = () => {
   return (

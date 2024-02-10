@@ -1,4 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
 @import "../../../styles/colors.scss";
-.compiler-container{
-    background-color:$white;
+.compiler-container {
+  background-color: $primary;
+  color: $white;
+  font-family: 'Nanum Gothic Coding', monospace;
+  p{
+    font-family: 'Nanum Gothic Coding', monospace;
+    color: aliceblue;
+  }
 }

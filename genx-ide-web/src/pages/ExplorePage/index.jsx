@@ -1,7 +1,15 @@
+// comp
+import Header from "../../components/Header/index";
+import ProjectList from "../../components/Explore/ProjectList";
+
+
 const Explore = () => {
   return (
-    <div>ExplorePage</div>
-  )
-}
+    <div>
+      <Header />
+      <ProjectList />
+    </div>
+  );
+};
 
-export default Explore
+export default Explore;
