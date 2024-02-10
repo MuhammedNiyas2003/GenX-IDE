@@ -2,11 +2,9 @@ import { Excalidraw } from "@excalidraw/excalidraw";
 
 const Drawer = () => {
   return (
-    <div>
-      <div style={{ height: "100%",width: '90vw' }}>
-        <Excalidraw theme="dark" />
+      <div style={{ height: "90vh",width: '100%' }}>
+        <Excalidraw  theme="dark" />
       </div>
-    </div>
   );
 };
 

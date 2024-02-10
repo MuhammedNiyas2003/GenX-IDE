@@ -11,6 +11,7 @@ import { Strategy as GitHubStrategy } from "passport-github2";
 //routes
 import compilerRouter from "./routes/compiler.js";
 import authRouter from "./routes/auth.js";
+import openaiRouter from "./routes/openai.js";
 // models
 import User from "./models/User.js";
 import session from "cookie-session";
@@ -116,6 +117,7 @@ io.on("connection", (socket) => {
 //routes
 app.use("/api/compiler", compilerRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/openai", openaiRouter);
 
 //db connection
 mongoose.set("strictQuery", true);

@@ -13,6 +13,7 @@
     "@adobe/react-spectrum": "^3.33.1",
     "@excalidraw/excalidraw": "^0.16.1",
     "@monaco-editor/react": "^4.6.0",
+    "@react-spectrum/dropzone": "^3.0.0-rc.1",
     "@reduxjs/toolkit": "^2.0.1",
     "axios": "^1.6.5",
     "gsap": "^3.12.5",

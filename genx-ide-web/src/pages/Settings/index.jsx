@@ -1,12 +1,11 @@
-import React from "react";
 import "./style.scss";
 import Header from "../../components/Header/index.jsx";
-import { Button, Item, TabList, TabPanels, Tabs } from "@adobe/react-spectrum";
+import { Button, Heading, Item, TabList, TabPanels, Tabs } from "@adobe/react-spectrum";
 
 const Settings = () => {
   return (
     <div className="settings-container">
-      <Header />
+      <Header leftItem={<Heading level={3}>Settings</Heading>} />
       <div className="tabs-section">
         <Tabs
           aria-label="History of Ancient Rome"

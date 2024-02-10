@@ -4,18 +4,12 @@ import { useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import socket from "../../utils/socket/socket.js";
 import InputBox from "../../components/Form/InputBox";
-import {
-  Item,
-  TabList,
-  TabPanels,
-  Tabs,
-  Button,
-  ActionButton,
-} from "@adobe/react-spectrum";
+import { Item, TabList, TabPanels, Tabs, Button } from "@adobe/react-spectrum";
 
 const CreateProject = () => {
   const { email } = useSelector((state) => state.auth.user);
   const [room, setRoom] = useState("");
+  const [joinRoom, setJoinRoom] = useState("");
 
   const navigate = useNavigate();
   const handleSubmitForm = useCallback(
@@ -97,7 +91,7 @@ const CreateProject = () => {
                 type="text"
               />
               <div className="generate-btn-container">
-                <Button variant="overBackground" onPress={generateCode}>
+                <Button  marginY={10} variant="overBackground" onPress={generateCode}>
                   Refresh Code
                 </Button>
               </div>
@@ -114,12 +108,12 @@ const CreateProject = () => {
               />
               <InputBox
                 label="Enter WORKSPACE ID"
-                setValue={setRoom}
-                value={room}
+                setValue={setJoinRoom}
+                value={joinRoom}
                 placeholder="WORKSPACE ID"
                 type="text"
               />
-              <Button onClick={handleSubmitForm} variant="accent">
+              <Button marginTop={5} onClick={handleSubmitForm} variant="accent">
                 Connect
               </Button>
             </Item>

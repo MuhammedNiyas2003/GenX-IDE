@@ -20,7 +20,10 @@ import AuthRoute from "../utils/AuthRoute";
 import ProtectedRoute from "../utils/ProtectedRoute";
 import Music from "../pages/Music/Index";
 import AboutPage from "../pages/AboutPage";
-import Settings from "../pages/Settings"
+import Settings from "../pages/Settings";
+import SetProfile from "../pages/SetProfile";
+import CodeConvertor from "../pages/CodeConvertor";
+import CodeGenerator from "../pages/CodeGenerator";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +35,14 @@ const router = createBrowserRouter(
           element={
             <AuthRoute>
               <Login />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/set-profile"
+          element={
+            <AuthRoute>
+              <SetProfile />
             </AuthRoute>
           }
         />
@@ -52,6 +63,8 @@ const router = createBrowserRouter(
         <Route path="api-testing" element={<APITesting />} />
         <Route path="drawer" element={<Drawer />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="code-converter" element={<CodeConvertor />} />
+        <Route path="code-generator" element={<CodeGenerator />} />
         <Route path="project" element={<Workspace />}>
           <Route path=":projectId" element={<Workspace />} />
         </Route>

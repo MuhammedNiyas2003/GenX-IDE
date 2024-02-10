@@ -14,7 +14,7 @@ const SelectBox = ({ data }) => {
       onChange={(e) => setSelectedOption(e.target.value)}
     >
       {data.map((item) => (
-        <option value={item}>{item.value}</option>
+        <option value={item.value}>{item.req}</option>
       ))}
     </select>
   );

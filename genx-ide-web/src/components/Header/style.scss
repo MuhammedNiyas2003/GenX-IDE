@@ -7,7 +7,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .header-search-container{
-    width: 30%;
+  .header-left-container,
+  .header-right-container {
+    width: 50%;
+  }
+  .header-right-container{
+    display: flex;
+    justify-content: flex-end;
   }
 }
