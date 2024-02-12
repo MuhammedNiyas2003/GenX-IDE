@@ -15,6 +15,7 @@ import {
   Text,
   ButtonGroup,
   AlertDialog,
+  Well,
 } from "@adobe/react-spectrum";
 import Spotify from "../../Spotify";
 import { spotifyIcon } from "../../../contants/icons";
@@ -53,7 +54,7 @@ const BottomBar = () => {
         {loggedIn ? (
           <DialogTrigger type="popover" placement="top" containerPadding={20}>
             <ActionButton staticColor="white" isQuiet>
-            <img className="spotify-icon" src={spotifyIcon} alt="spotify" />{" "}
+              <img className="spotify-icon" src={spotifyIcon} alt="spotify" />{" "}
               <p className="spotify-connect-text">Play Music</p>
             </ActionButton>
             <Dialog
@@ -79,32 +80,42 @@ const BottomBar = () => {
               cancelLabel="Cancel"
               onPrimaryAction={() => spotifyLoginHandler()}
             >
-              Connect your spotify account ( The spotify account should be added to the dashboard and premium ⚠️ )
+              Connect your spotify account ( The spotify account should be added
+              to the dashboard and premium ⚠️ )
             </AlertDialog>
           </DialogTrigger>
         )}
       </div>
-      <div className="bottombar-details">
-        <div className="bottombar-users">
-          <img
-            src="https://astrotalk.com/astrology-blog/wp-content/uploads/2023/08/istockphoto-1040964930-612x612-1.jpg"
-            alt=""
-          />
-        </div>
-        <div className="bottombar-users">
-          <img
-            src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg"
-            alt=""
-          />
-          "
-        </div>
-        <div className="bottombar-users">
-          <img
-            src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
-            alt=""
-          />
-        </div>
-      </div>
+      <DialogTrigger isDismissable>
+        <ActionButton staticColor="white" isQuiet>
+          <div className="bottombar-details">
+            <div className="bottombar-users">
+              <img
+                src="https://astrotalk.com/astrology-blog/wp-content/uploads/2023/08/istockphoto-1040964930-612x612-1.jpg"
+                alt=""
+              />
+            </div>
+            <div className="bottombar-users">
+              <img
+                src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg"
+                alt=""
+              />
+              "
+            </div>
+            <div className="bottombar-users">
+              <img
+                src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+        </ActionButton>
+        <AlertDialog variant="information" title="Contributors">
+          <Well>Better a little which is well done</Well>
+          <Well>Better a little which is well done</Well>
+          <Well>Better a little which is well done</Well>
+        </AlertDialog>
+      </DialogTrigger>
     </div>
   );
 };
