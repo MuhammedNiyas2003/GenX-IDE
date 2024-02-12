@@ -17,7 +17,12 @@ import {
   AlertDialog,
 } from "@adobe/react-spectrum";
 import Spotify from "../../Spotify";
-import { spotifyIcon } from "../../../contants/icons";
+import {
+  forwardIcon,
+  pauseIcon,
+  rewindIcon,
+  spotifyIcon,
+} from "../../../contants/icons";
 
 const BottomBar = () => {
   const { loggedIn } = useSelector((state) => state.spotify);
@@ -53,7 +58,7 @@ const BottomBar = () => {
         {loggedIn ? (
           <DialogTrigger type="popover" placement="top" containerPadding={20}>
             <ActionButton staticColor="white" isQuiet>
-            <img className="spotify-icon" src={spotifyIcon} alt="spotify" />{" "}
+              <img className="spotify-icon" src={spotifyIcon} alt="spotify" />{" "}
               <p className="spotify-connect-text">Play Music</p>
             </ActionButton>
             <Dialog
@@ -79,11 +84,20 @@ const BottomBar = () => {
               cancelLabel="Cancel"
               onPrimaryAction={() => spotifyLoginHandler()}
             >
-              Connect your spotify account ( The spotify account should be added to the dashboard and premium ⚠️ )
+              Connect your spotify account ( The spotify account should be added
+              to the dashboard and premium ⚠️ )
             </AlertDialog>
           </DialogTrigger>
         )}
       </div>
+      {loggedIn && (
+        <div className="bottombar-music-controllers">
+          <img src={rewindIcon} alt="" />
+          <img src={pauseIcon} alt="" />
+          <img src={forwardIcon} alt="" />
+        </div>
+      )}
+
       <div className="bottombar-details">
         <div className="bottombar-users">
           <img

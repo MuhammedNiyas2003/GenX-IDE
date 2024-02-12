@@ -1,0 +1,60 @@
+.projectcard-container {
+  width: 300px;
+  min-height: 250px;
+  background-color: #2a303b;
+  margin: 1rem;
+  border-radius: 10px;
+  transition: all 0.1s ease-in;
+  overflow: hidden;
+  border: none;
+  padding: 0 2rem;
+  cursor: pointer;
+}
+.projectcard-container:hover {
+  box-shadow: 8px 10px 33px -10px rgba(0, 0, 0, 0.67);
+  -webkit-box-shadow: 8px 10px 33px -10px rgba(0, 0, 0, 0.67);
+  -moz-box-shadow: 8px 10px 33px -10px rgba(0, 0, 0, 0.67);
+}
+
+.projectcard-header {
+  display: flex;
+  margin-top: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.projectcard-header p {
+  color: grey;
+  font-size: 13px;
+}
+
+.projectcard-profile img {
+  border-radius: 50%;
+  width: 25px;
+  aspect-ratio: 1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border: 1px solid #2a303b;
+}
+
+.projectcard-content {
+  margin-top: 10px;
+}
+.projectcard-content h3 {
+  font-weight: 700;
+  color: aliceblue;
+  font-size: 18px;
+}
+.projectcard-content p {
+  margin-top: 6px;
+  color: rgb(185, 182, 182);
+  font-weight: 300;
+}
+.projectcard-content .projectcard-tags {
+  padding: 0.5rem 0;
+  margin-top: 3px;
+}
+.projectcard-content .projectcard-tags p {
+  margin: 0;
+  color: #065ac2;
+  font-weight: 400;
+}/*# sourceMappingURL=style.css.map */

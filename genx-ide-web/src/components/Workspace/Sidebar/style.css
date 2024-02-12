@@ -1,0 +1,25 @@
+.sidebar-wrapper {
+  width: 50px;
+  height: 100vh;
+  background-color: #212329;
+}
+
+.sidebar-item {
+  width: 100%;
+  aspect-ratio: 1;
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar-item .sidebar-icon {
+  width: 25px;
+  opacity: 0.3;
+}
+.sidebar-item .sidebar-icon:hover {
+  opacity: 1;
+}
+
+.active .sidebar-icon {
+  opacity: 1;
+}/*# sourceMappingURL=style.css.map */

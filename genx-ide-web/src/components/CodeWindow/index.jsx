@@ -2,7 +2,7 @@ import SelectBox from "../Form/SelectBox";
 import "./style.scss";
 import { Editor } from "@monaco-editor/react";
 
-const CodeWindow = () => {
+const CodeWindow = ({ value, setValue }) => {
   const reqList = [
     {
       id: "01",
@@ -33,8 +33,10 @@ const CodeWindow = () => {
       <Editor
         height="100%"
         width="100%"
-        defaultLanguage="javascript"
+        defaultLanguage="python"
         theme="vs-dark"
+        value={value}
+        onChange={(value) => setValue(value)}
       />
     </div>
   );
