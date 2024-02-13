@@ -10,7 +10,11 @@ const CodeConvertor = () => {
   const [source, setSource] = useState("javascript");
   const [destination, setDestination] = useState("python");
   const [generatedCode, setGeneratedCode] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const convertHandler = async () => {
+    setIsLoading(true);
     const formData = {
       sourceCode,
       source,
@@ -23,21 +27,30 @@ const CodeConvertor = () => {
       );
       console.log(response.data);
       setGeneratedCode(response.data);
+      return
     } catch (error) {
       console.log(error);
+      return
+    } finally {
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    console.log(sourceCode);
-  }, [sourceCode]);
+    console.log(sourceCode,source,destination);
+  }, [sourceCode,source,destination]);
 
   return (
     <div className="codeconverter-container">
       <Header
         leftItem={<SpectrumHeader level={3}>Code Converter</SpectrumHeader>}
         rightItem={
-          <Button variant="accent" style="fill" onPress={convertHandler}>
+          <Button
+            isPending={isLoading}
+            variant="accent"
+            style="fill"
+            onPress={convertHandler}
+          >
             Convert
           </Button>
         }

@@ -26,14 +26,6 @@ const codeConverter = async (req, res) => {
         },
       }
     );
-      const generatedCode = response.data.choices[0].message.content
-    console.log(generatedCode);
-    console.log(response.data.usage);
-    res.send(generatedCode)
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        },
-      }
-    );
     const generatedCode = response.data.choices[0].message.content;
     console.log(generatedCode);
     console.log(response.data.usage);
