@@ -15,6 +15,7 @@ import {
   Text,
   ButtonGroup,
   AlertDialog,
+  Well,
 } from "@adobe/react-spectrum";
 import Spotify from "../../Spotify";
 import {
@@ -90,6 +91,36 @@ const BottomBar = () => {
           </DialogTrigger>
         )}
       </div>
+      <DialogTrigger isDismissable>
+        <ActionButton staticColor="white" isQuiet>
+          <div className="bottombar-details">
+            <div className="bottombar-users">
+              <img
+                src="https://astrotalk.com/astrology-blog/wp-content/uploads/2023/08/istockphoto-1040964930-612x612-1.jpg"
+                alt=""
+              />
+            </div>
+            <div className="bottombar-users">
+              <img
+                src="https://t3.ftcdn.net/jpg/02/99/04/20/360_F_299042079_vGBD7wIlSeNl7vOevWHiL93G4koMM967.jpg"
+                alt=""
+              />
+              "
+            </div>
+            <div className="bottombar-users">
+              <img
+                src="https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+        </ActionButton>
+        <AlertDialog variant="information" title="Contributors">
+          <Well>Better a little which is well done</Well>
+          <Well>Better a little which is well done</Well>
+          <Well>Better a little which is well done</Well>
+        </AlertDialog>
+      </DialogTrigger>
       {loggedIn && (
         <div className="bottombar-music-controllers">
           <img src={rewindIcon} alt="" />
