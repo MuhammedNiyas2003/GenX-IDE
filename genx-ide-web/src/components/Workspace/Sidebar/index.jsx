@@ -13,8 +13,8 @@ const sidebarItem = [
   { id: "01", name: "Editor", path: "project/123", icon: docIcon },
   { id: "02", name: "Draw", path: "drawer", icon: drawIcon },
   { id: "03", name: "API", path: "api-testing", icon: apiIcon },
-  { id: "04", name: "Convertor", path: "code-converter", icon: aiIcon },
-  { id: "05", name: "Generator", path: "code-generator", icon: generatorIcon },
+  { id: "04", name: "Convertor", path: "code-converter", icon: generatorIcon },
+  { id: "05", name: "Generator", path: "code-generator", icon: aiIcon },
   { id: "06", name: "Settings", path: "settings", icon: settingsIcon },
 ];
 const Sidebar = () => {

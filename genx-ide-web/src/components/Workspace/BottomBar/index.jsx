@@ -12,8 +12,6 @@ import {
   Content,
   Heading,
   Divider,
-  Text,
-  ButtonGroup,
   AlertDialog,
   Well,
 } from "@adobe/react-spectrum";
@@ -53,7 +51,21 @@ const BottomBar = () => {
   return (
     <div className="bottombar-container">
       <div className="bottombar-user">
-        <Button onClick={logoutHandler} text="Logout" />
+        <DialogTrigger>
+          <ActionButton staticColor="white" isQuiet>
+            <p className="logout-btn">Sign Out</p>
+          </ActionButton>
+          <AlertDialog
+            variant="destructive"
+            title="Sign Out"
+            primaryActionLabel="Sign Out"
+            cancelLabel="Cancel"
+            onPrimaryAction={logoutHandler}
+          >
+            Connect your spotify account ( The spotify account should be added
+            to the dashboard and premium ⚠️ )
+          </AlertDialog>
+        </DialogTrigger>
       </div>
       <div className="bottombar-music">
         {loggedIn ? (
@@ -91,6 +103,7 @@ const BottomBar = () => {
           </DialogTrigger>
         )}
       </div>
+<<<<<<< Updated upstream
       <DialogTrigger isDismissable>
         <ActionButton staticColor="white" isQuiet>
           <div className="bottombar-details">
@@ -121,6 +134,8 @@ const BottomBar = () => {
           <Well>Better a little which is well done</Well>
         </AlertDialog>
       </DialogTrigger>
+=======
+>>>>>>> Stashed changes
       {loggedIn && (
         <div className="bottombar-music-controllers">
           <img src={rewindIcon} alt="" />

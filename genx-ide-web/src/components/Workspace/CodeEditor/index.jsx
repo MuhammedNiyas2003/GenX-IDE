@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentCode } from "../../../state/reducers/workspaceSlice.js";
 
 const CodeEditor = () => {
-  const { currentCode } = useSelector(state=>state.workspace)
+  const { currentCode } = useSelector((state) => state.workspace);
   const dispatch = useDispatch();
 
   function onCodeChange(value) {
@@ -18,6 +18,9 @@ const CodeEditor = () => {
       onChange={onCodeChange}
       defaultValue={currentCode}
       theme="vs-dark"
+      options={{
+        mouseWheelScrollSensitivity: 0.5,
+      }}
     />
   );
 };
