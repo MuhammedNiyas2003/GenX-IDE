@@ -22,7 +22,6 @@
     background-color: $secondary;
     color: $lightGrey;
     border-radius: 7px;
-
     border: 1px solid $darkGold;
     display: flex;
     overflow: hidden;
@@ -52,14 +51,13 @@
   }
 }
 
-
-.input-box-left-icon{
+.input-box-left-icon {
   width: 50px;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  img{
+  img {
     width: 20px;
   }
 }

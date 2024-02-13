@@ -7,3 +7,22 @@
     width: 60%;
   }
 }
+
+// general
+.general-form {
+  width: 100%;
+  p {
+    margin-bottom: 1rem;
+    color: $lightGrey;
+  }
+  .general-inputs {
+    width: 100%;
+    display: flex;
+  }
+}
+
+.general-add-btn{
+  display: flex;
+  justify-content: flex-end;
+  margin: 1.5rem 0;
+}

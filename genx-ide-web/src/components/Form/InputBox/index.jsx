@@ -10,16 +10,19 @@ const InputBox = ({
   setValue,
   RightItem,
   LeftIcon,
+  isFull,
+  leftAction,
+  style,
 }) => {
   const [isShown, setIsShown] = useState(true);
   const isPassword = type === "password";
 
   return (
     <div className="input-box-container">
-      <div className="label-container">
+      <div style={{ width: isFull ? '100%' : '90%'}} className="label-container">
         <label>{label}</label>
       </div>
-      <div className="input-box-input">
+      <div style={{ width: isFull ? '100%' : '90%'}} className="input-box-input">
         {RightItem && <RightItem />}
         <input
           value={value}
