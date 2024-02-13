@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap");
+.compiler-container {
+  background-color: #212329;
+  color: #fff;
+  font-family: "Nanum Gothic Coding", monospace;
+}
+.compiler-container p {
+  font-family: "Nanum Gothic Coding", monospace;
+  color: aliceblue;
+}/*# sourceMappingURL=style.css.map */

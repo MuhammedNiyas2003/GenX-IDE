@@ -1,0 +1,27 @@
+.rightbar-container {
+  position: fixed;
+  right: 0;
+  height: 100%;
+  width: 60px;
+  background-color: #2a303b;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video-items {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.video-items .video-item {
+  width: 90%;
+  aspect-ratio: 1.3;
+  margin: 5px;
+  background: grey;
+  border-radius: 8px;
+  overflow: hidden;
+}/*# sourceMappingURL=style.css.map */

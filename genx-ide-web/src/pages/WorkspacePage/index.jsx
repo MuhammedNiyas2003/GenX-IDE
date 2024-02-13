@@ -9,15 +9,9 @@ import Explorer from "../../components/Workspace/Explorer";
 const Workspace = () => {
   const [isDragging, setIsDragging] = useState(false);
 
-  
-
   return (
     <>
-      <Split
-        gutterSize={1}
-        className="main-split"
-        sizes={[16, 80]}
-      >
+      <Split gutterSize={1} className="main-split" sizes={[16, 80]}>
         <Explorer />
         <Editor />
       </Split>

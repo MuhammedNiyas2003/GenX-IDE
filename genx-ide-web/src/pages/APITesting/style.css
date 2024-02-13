@@ -1,0 +1,11 @@
+.api-container {
+  background-color: #212329;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.api-card {
+  width: 90%;
+}/*# sourceMappingURL=style.css.map */

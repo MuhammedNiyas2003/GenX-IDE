@@ -1,0 +1,11 @@
+.selectbox-container {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  min-width: 70px;
+  padding-left: 1rem;
+  font-weight: 500;
+}
+.selectbox-container option {
+  color: black;
+}/*# sourceMappingURL=style.css.map */

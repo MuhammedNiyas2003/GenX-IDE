@@ -1,0 +1,13 @@
+@import "../../styles/colors.scss";
+.codeconverter-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $primary;
+}
+.editor-window-container {
+  width: 100%;
+  min-height: 80vh;
+//   padding: 0 5rem;
+  display: flex;
+  justify-content: space-between;
+}

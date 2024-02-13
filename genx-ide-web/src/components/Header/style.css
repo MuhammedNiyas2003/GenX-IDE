@@ -1,0 +1,17 @@
+.header-container {
+  background-color: #212329;
+  width: 100%;
+  min-height: 10vh;
+  padding: 0 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-container .header-left-container,
+.header-container .header-right-container {
+  width: 50%;
+}
+.header-container .header-right-container {
+  display: flex;
+  justify-content: flex-end;
+}/*# sourceMappingURL=style.css.map */

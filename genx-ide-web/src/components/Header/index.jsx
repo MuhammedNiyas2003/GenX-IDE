@@ -3,18 +3,13 @@ import "./style.scss";
 import { Breadcrumbs, Item } from "@adobe/react-spectrum";
 //comp
 import InputBox from "../Form/InputBox";
+//icons
 import { searchIcon } from "../../contants/icons";
-const Header = () => {
+const Header = ({ leftItem, rightItem }) => {
   return (
     <div className="header-container">
-      <Breadcrumbs>
-        <Item key="home">Home</Item>
-        <Item key="trendy">Trendy</Item>
-        <Item key="march 2020 assets">March 2020 Assets</Item>
-      </Breadcrumbs>
-      <div className="header-search-container">
-        <InputBox placeholder="Search" type="text" LeftIcon={searchIcon} />
-      </div>
+      <div className="header-left-container">{leftItem}</div>
+      <div className="header-right-container">{rightItem}</div>
     </div>
   );
 };
