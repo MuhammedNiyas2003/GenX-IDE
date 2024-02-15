@@ -1,24 +1,105 @@
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
 import { useState, useCallback, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import socket from "../../utils/socket/socket.js";
 import InputBox from "../../components/Form/InputBox";
 import { Item, TabList, TabPanels, Tabs, Button } from "@adobe/react-spectrum";
+import {
+  setCurrentWorkspace,
+  setFileFolder,
+} from "../../state/reducers/workspaceSlice.js";
 
 const CreateProject = () => {
-  const { email } = useSelector((state) => state.auth.user);
-  const [room, setRoom] = useState("");
+  const { email, _id } = useSelector((state) => state.auth.user);
   const [joinRoom, setJoinRoom] = useState("");
 
+  const [projectName, setProjectName] = useState("");
+  const [language, setLanguage] = useState("");
+  const [workspaceId, setWorkspaceId] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
-  const handleSubmitForm = useCallback(
-    (e) => {
-      e.preventDefault();
-      socket.emit("room:join", { email, room });
-    },
-    [email, room, socket]
-  );
+
+  //create workspace
+  const handleSubmitForm = async (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    try {
+      const workspaceData = {
+        name: projectName,
+        language,
+        admin: _id,
+        collaborators: [_id],
+      };
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/workspace/create-workspace`,
+        workspaceData
+      );
+      const { data, status } = response.data;
+      console.log(response);
+      if (status === "SUCESS") {
+        console.log(data);
+        dispatch(setCurrentWorkspace(data));
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${data._id}`
+          );
+          const fileFoldersResponse = response.data;
+          dispatch(setFileFolder(response.data));
+        } catch (error) {
+          console.log(error);
+        }
+        socket.emit("room:join", { email, room: data._id });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  //connect workspace
+
+  const connectWorkspaceHandler = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/api/workspace/${workspaceId}`
+      );
+      const { data, status } = response.data;
+
+      if (status === "SUCESS") {
+        console.log(data);
+        dispatch(setCurrentWorkspace(data));
+
+        try {
+          const fileFolderResponse = await axios.get(
+            `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${data._id}`
+          );
+          const { status: FileFolderStatus, data: FileFolderData } =
+            fileFolderResponse.data;
+          console.log(fileFolderResponse.data);
+          if (FileFolderStatus === "SUCESS") {
+            dispatch(setFileFolder(FileFolderData));
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        socket.emit("room:join", { email, room: data._id });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleJoinRoom = useCallback(
     (data) => {
@@ -27,16 +108,6 @@ const CreateProject = () => {
     },
     [navigate]
   );
-  const generateCode = () => {
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let code = "";
-
-    for (let i = 0; i < 8; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      code += characters.charAt(randomIndex);
-    }
-    setRoom(code);
-  };
 
   //socket
   useEffect(() => {
@@ -45,11 +116,6 @@ const CreateProject = () => {
       socket.off("room:join", handleJoinRoom);
     };
   }, [socket, handleJoinRoom]);
-
-  //gen rooom code
-  useEffect(() => {
-    generateCode();
-  }, []);
 
   return (
     <div className="createproject-container">
@@ -72,48 +138,38 @@ const CreateProject = () => {
                 label="Project name"
                 placeholder="Enter project name..."
                 type="text"
+                value={projectName}
+                setValue={setProjectName}
               />
               <InputBox
                 label="Language"
                 placeholder="eg: javascript, c++ ..."
                 type="text"
+                value={language}
+                setValue={setLanguage}
               />
-              <InputBox
-                label="Your Email"
-                placeholder="Enter your email"
-                type="email"
-                value={email}
-              />
-              <InputBox
-                label="Enter WORKSPACE ID"
-                value={room}
-                placeholder="WORKSPACE ID"
-                type="text"
-              />
-              <div className="generate-btn-container">
-                <Button  marginY={10} variant="overBackground" onPress={generateCode}>
-                  Refresh Code
-                </Button>
-              </div>
-              <Button onClick={handleSubmitForm} variant="accent">
+              <Button
+                isPending={isLoading}
+                onClick={handleSubmitForm}
+                variant="accent"
+              >
                 Create workspace
               </Button>
             </Item>
             <Item key="connect">
               <InputBox
-                label="Your Email"
-                placeholder="Enter your email"
-                type="email"
-                value={email}
-              />
-              <InputBox
                 label="Enter WORKSPACE ID"
-                setValue={setJoinRoom}
-                value={joinRoom}
+                setValue={setWorkspaceId}
+                value={workspaceId}
                 placeholder="WORKSPACE ID"
                 type="text"
               />
-              <Button marginTop={5} onClick={handleSubmitForm} variant="accent">
+              <Button
+                isPending={isLoading}
+                marginTop={5}
+                onClick={connectWorkspaceHandler}
+                variant="accent"
+              >
                 Connect
               </Button>
             </Item>

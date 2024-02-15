@@ -3,6 +3,7 @@ import { DiCss3, DiJavascript, DiNpm } from "react-icons/di";
 import { FaList, FaRegFolder, FaRegFolderOpen } from "react-icons/fa";
 import TreeView, { flattenTree } from "react-accessible-treeview";
 import "./style.scss";
+import { useSelector } from "react-redux";
 
 const folder = {
   name: "",
@@ -33,9 +34,9 @@ const folder = {
   ],
 };
 
-const data = flattenTree(folder);
-
 function Explorer() {
+  const { fileFolders } = useSelector((state) => state.workspace);
+  const data = flattenTree(fileFolders);
   return (
     <div>
       <div className="directory">

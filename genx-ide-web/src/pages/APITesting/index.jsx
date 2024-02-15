@@ -74,7 +74,7 @@ const APITesting = () => {
               <h1>Authorisation</h1>
             </Item>
             <Item key="Headers">
-              <h1>Header</h1>
+              <h1 >Header</h1>
             </Item>
             <Item key="Body">
               <h1>Body</h1>

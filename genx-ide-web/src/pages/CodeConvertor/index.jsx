@@ -1,9 +1,9 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import "./style.scss";
 import Header from "../../components/Header/index.jsx";
 import CodeWindow from "../../components/CodeWindow/index.jsx";
 import { Button, Heading as SpectrumHeader } from "@adobe/react-spectrum";
-import axios from "axios";
 
 const CodeConvertor = () => {
   const [sourceCode, setSourceCode] = useState(null);
@@ -25,20 +25,20 @@ const CodeConvertor = () => {
         `${import.meta.env.VITE_SERVER_URL}/api/openai/covert-code`,
         formData
       );
-      console.log(response.data);
+      console.log(response);
       setGeneratedCode(response.data);
-      return
+      return;
     } catch (error) {
       console.log(error);
-      return
+      return;
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    console.log(sourceCode,source,destination);
-  }, [sourceCode,source,destination]);
+    console.log(sourceCode, source, destination);
+  }, [sourceCode, source, destination]);
 
   return (
     <div className="codeconverter-container">
@@ -58,8 +58,8 @@ const CodeConvertor = () => {
       <div className="editor-window-container">
         <CodeWindow setValue={setSourceCode} value={sourceCode} size="half" />
         <CodeWindow
-          setValue={setGeneratedCode}
-          value={generatedCode}
+          // setValue={setGeneratedCode}
+          // value={generatedCode}
           size="half"
         />
       </div>

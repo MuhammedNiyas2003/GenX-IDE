@@ -38,13 +38,22 @@ const workspaceSlice = createSlice({
   name: "workspace",
   initialState: {
     currentCode: defaultBubbleSortCode,
+    currentWorkspace: null,
+    fileFolders: null,
   },
   reducers: {
     setCurrentCode: (state, action) => {
       state.currentCode = action.payload;
     },
+    setCurrentWorkspace: (state, action) => {
+      state.currentWorkspace = action.payload;
+    },
+    setFileFolder: (state, action) => {
+      state.fileFolders = action.payload;
+    },
   },
 });
 
-export const { setCurrentCode } = workspaceSlice.actions;
+export const { setCurrentCode, setCurrentWorkspace, setFileFolder } =
+  workspaceSlice.actions;
 export default workspaceSlice.reducer;

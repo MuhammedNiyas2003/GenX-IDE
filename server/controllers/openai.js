@@ -32,6 +32,7 @@ const codeConverter = async (req, res) => {
     res.send(generatedCode);
   } catch (err) {
     console.log("error here", err.response.data);
+    res.send(err.response.data);
     return;
   }
 };
