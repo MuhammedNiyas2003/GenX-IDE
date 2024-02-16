@@ -13,7 +13,6 @@ import {
 
 const CreateProject = () => {
   const { email, _id } = useSelector((state) => state.auth.user);
-  const [joinRoom, setJoinRoom] = useState("");
 
   const [projectName, setProjectName] = useState("");
   const [language, setLanguage] = useState("");
@@ -45,15 +44,6 @@ const CreateProject = () => {
       if (status === "SUCESS") {
         console.log(data);
         dispatch(setCurrentWorkspace(data));
-        try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${data._id}`
-          );
-          const fileFoldersResponse = response.data;
-          dispatch(setFileFolder(response.data));
-        } catch (error) {
-          console.log(error);
-        }
         socket.emit("room:join", { email, room: data._id });
       }
     } catch (error) {
@@ -78,20 +68,6 @@ const CreateProject = () => {
       if (status === "SUCESS") {
         console.log(data);
         dispatch(setCurrentWorkspace(data));
-
-        try {
-          const fileFolderResponse = await axios.get(
-            `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${data._id}`
-          );
-          const { status: FileFolderStatus, data: FileFolderData } =
-            fileFolderResponse.data;
-          console.log(fileFolderResponse.data);
-          if (FileFolderStatus === "SUCESS") {
-            dispatch(setFileFolder(FileFolderData));
-          }
-        } catch (error) {
-          console.log(error);
-        }
         socket.emit("room:join", { email, room: data._id });
       }
     } catch (error) {

@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import Workspace from "../models/Workspace.js";
+import FileFolder from "../models/FileFolder.js";
 
 const createWorkspace = async (req, res) => {
   const { name, language, admin, collaborators } = req.body;
@@ -10,10 +11,19 @@ const createWorkspace = async (req, res) => {
       admin,
       collaborators,
     });
+
     const workspaceCreated = await newWorkspace.save();
     await User.findByIdAndUpdate(admin, {
       $push: { workspaces: workspaceCreated._id },
     });
+    if (workspaceCreated) {
+      const rootFile = new FileFolder({
+        name: "root",
+        type: "folder",
+        workspaceId: workspaceCreated._id,
+      });
+      await rootFile.save();
+    }
     res.json({
       status: "SUCESS",
       data: workspaceCreated,
