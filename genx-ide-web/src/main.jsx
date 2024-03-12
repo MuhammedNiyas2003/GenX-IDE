@@ -12,12 +12,12 @@ import {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <SpectrumProvider theme={defaultTheme}>
-          <App />
-        </SpectrumProvider>
-      </PersistGate>
-    </Provider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <SpectrumProvider theme={defaultTheme}>
+            <App />
+          </SpectrumProvider>
+        </PersistGate>
+      </Provider>
   </React.StrictMode>
 );

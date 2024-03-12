@@ -49,7 +49,6 @@ const CreateProject = () => {
           const response = await axios.get(
             `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${data._id}`
           );
-          const fileFoldersResponse = response.data;
           dispatch(setFileFolder(response.data));
         } catch (error) {
           console.log(error);

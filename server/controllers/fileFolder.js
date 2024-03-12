@@ -19,6 +19,7 @@ const getFileFolders = async (req, res) => {
     return children.map((child) => {
       const { _id, name, type, code } = child;
       return {
+        _id,
         name,
         type,
         code: code ? code : "",

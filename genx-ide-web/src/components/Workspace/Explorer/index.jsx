@@ -1,48 +1,54 @@
-import React from "react";
+import "./style.scss";
 import { DiCss3, DiJavascript, DiNpm } from "react-icons/di";
 import { FaList, FaRegFolder, FaRegFolderOpen } from "react-icons/fa";
-import TreeView, { flattenTree } from "react-accessible-treeview";
-import "./style.scss";
-import { useSelector } from "react-redux";
-
-const folder = {
-  name: "",
-  children: [
-    {
-      name: "src",
-      children: [{ name: "index.js" }, { name: "styles.css" }],
-    },
-    {
-      name: "node_modules",
-      children: [
-        {
-          name: "react-accessible-treeview",
-          children: [{ name: "index.js" }],
-        },
-        { name: "react", children: [{ name: "index.js" }] },
-      ],
-    },
-    {
-      name: ".npmignore",
-    },
-    {
-      name: "package.json",
-    },
-    {
-      name: "webpack.config.js",
-    },
-  ],
-};
+import TreeView from "react-accessible-treeview";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentCode } from "../../../state/reducers/workspaceSlice";
 
 function Explorer() {
+  const dispatch = useDispatch();
   const { fileFolders } = useSelector((state) => state.workspace);
-  const data = flattenTree(fileFolders);
+
+  function flattenStructure(node, idCounter = { value: 0 }, parentId = null) {
+    const flatNode = {
+      id: idCounter.value++,
+      _id: node._id,
+      name: node.name,
+      parent: parentId,
+      meta: null,
+      type: node.type,
+      code: node?.code,
+      children: [],
+    };
+
+    let result = [flatNode];
+
+    if (node.children && node.children.length > 0) {
+      for (const child of node.children) {
+        const childNodes = flattenStructure(child, idCounter, flatNode.id);
+        result = result.concat(childNodes);
+        flatNode.children.push(...childNodes.map((childNode) => childNode.id));
+      }
+    }
+
+    return result;
+  }
+  const flatStructure = flattenStructure(fileFolders);
+
+  const onFileSelect = (element) => {
+    if (element.type === "file") {
+      dispatch(setCurrentCode(element.code));
+      console.log(element.type, element.code);
+    }
+  };
+
   return (
     <div>
       <div className="directory">
         <TreeView
-          data={data}
-          aria-label="directory tree"
+          data={flatStructure}
+          aria-label="file-folders-tree"
+          onNodeSelect={({ element }) => onFileSelect(element)}
           nodeRenderer={({
             element,
             isBranch,

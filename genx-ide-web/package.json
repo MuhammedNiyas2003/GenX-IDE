@@ -15,6 +15,8 @@
     "@monaco-editor/react": "^4.6.0",
     "@react-spectrum/dropzone": "^3.0.0-rc.1",
     "@reduxjs/toolkit": "^2.0.1",
+    "@spectrum-css/treeview": "^9.2.6",
+    "@spectrum-css/vars": "^9.0.8",
     "axios": "^1.6.5",
     "gsap": "^3.12.5",
     "install": "^0.13.0",
