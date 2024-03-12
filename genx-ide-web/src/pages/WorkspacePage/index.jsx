@@ -5,9 +5,9 @@ import Split from "react-split";
 import RightBar from "../../components/Workspace/RightBar";
 import Editor from "../../components/Workspace/Editor";
 import Explorer from "../../components/Workspace/Explorer";
+import { useSelector } from "react-redux";
 
 const Workspace = () => {
-  const [isDragging, setIsDragging] = useState(false);
 
   return (
     <>
