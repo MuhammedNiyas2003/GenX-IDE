@@ -79,7 +79,9 @@ const Spotify = () => {
       <button onClick={changeTrack}>change track</button>
       <button onClick={pauseMusic}>pause</button>
       <button onClick={playMusic}>play</button>
+      {/* <img src={currentPlaying.image} alt="" /> */}
       {currentPlaying && <p>{currentPlaying.name}</p>}
+
     </div>
   );
 };

@@ -3,11 +3,12 @@ import Workspace from "../models/Workspace.js";
 import FileFolder from "../models/FileFolder.js";
 
 const createWorkspace = async (req, res) => {
-  const { name, language, admin, collaborators } = req.body;
+  const { name, language, admin, collaborators, desc } = req.body;
   try {
     const newWorkspace = new Workspace({
       name,
       language,
+      desc,
       admin,
       collaborators,
     });
@@ -29,6 +30,7 @@ const createWorkspace = async (req, res) => {
       data: workspaceCreated,
     });
   } catch (err) {
+    console.log(err);
     res.json({
       status: "FAILED",
       err,
@@ -64,4 +66,40 @@ const getWorkspace = async (req, res) => {
     });
   }
 };
-export { createWorkspace, getRecentWorkspaces, getWorkspace };
+const updateWorkspaceDetails = async (req, res) => {
+  const { workspaceId } = req.params;
+  const { name, desc, language } = req.body;
+
+  try {
+    if (workspaceId) {
+      const workspace = await Workspace.findById(workspaceId);
+      if (workspace) {
+        const updatedWorkspace = await Workspace.findOneAndUpdate(
+          { _id: workspaceId },
+          { $set: { desc, language, name } },
+          { new: true }
+        );
+        console.log(updatedWorkspace);
+        res.json({
+          status: "SUCESS",
+          data: updatedWorkspace,
+        });
+      } else {
+        console.log("invalid workspace id");
+      }
+    } else {
+      console.log("workspace id not provided!");
+    }
+  } catch (err) {
+    res.json({
+      status: "FAILED",
+      err,
+    });
+  }
+};
+export {
+  createWorkspace,
+  getRecentWorkspaces,
+  getWorkspace,
+  updateWorkspaceDetails,
+};

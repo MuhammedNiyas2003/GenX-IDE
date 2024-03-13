@@ -2,7 +2,6 @@ import "./style.scss";
 import { useState } from "react";
 import Header from "../../components/Header/index.jsx";
 import {
-  ActionButton,
   AlertDialog,
   Button,
   DialogTrigger,
@@ -15,36 +14,54 @@ import {
   Well,
 } from "@adobe/react-spectrum";
 import InputBox from "../../components/Form/InputBox/index.jsx";
+// api
+import axios from "axios";
+//redux
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setCurrentWorkspace } from "../../state/reducers/workspaceSlice.js";
 
 const Settings = () => {
   const [name, setName] = useState("Student Guard");
-  const [des, setDec] = useState("Lorem ipsum dolor sit amet.");
+  const [desc, setDesc] = useState("Lorem ipsum dolor sit amet.");
+  const [selectedLanguage, setSelectedLanguage] = useState("javascript");
 
-  const reqList = [
-    {
-      id: "01",
-      req: "GET",
-      value: "GET",
-      color: "green",
-    },
-    {
-      id: "02",
-      req: "POST",
-      value: "POST",
-      color: "red",
-    },
-    {
-      id: "03",
-      req: "PUT",
-      value: "PUT",
-      color: "yellow",
-    },
-    {
-      id: "04",
-      req: "DELETE",
-      color: "blue",
-    },
-  ];
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const { currentWorkspace: workspace } = useSelector(
+    (state) => state.workspace
+  );
+
+  useEffect(() => {
+    setName(workspace.name);
+    setDesc(workspace.desc);
+    setSelectedLanguage(workspace.language);
+  }, []);
+
+  const dispatch = useDispatch();
+  const updateProjectSettings = async () => {
+    const updateData = {
+      name,
+      desc,
+      language: selectedLanguage,
+    };
+    try {
+      setIsUpdating(true);
+      const response = await axios.put(
+        `${import.meta.env.VITE_SERVER_URL}/api/workspace/${workspace._id}`,
+        updateData
+      );
+      const { status, data } = response.data;
+      if (status === "SUCESS") {
+        dispatch(setCurrentWorkspace(data));
+        console.log(data);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   return (
     <div className="settings-container">
@@ -75,11 +92,26 @@ const Settings = () => {
                 <InputBox isFull value={name} setValue={setName} label="Name" />
                 <InputBox
                   isFull
-                  value={des}
-                  setValue={setDec}
+                  value={desc}
+                  setValue={setDesc}
                   label="Description"
                 />
-                <InputBox isFull value={name} setValue={setName} label="Name" />
+                <InputBox
+                  isFull
+                  value={selectedLanguage}
+                  setValue={setSelectedLanguage}
+                  label="Language"
+                />
+                <div className="general-add-btn">
+                  <Button
+                    isPending={isUpdating}
+                    onPress={updateProjectSettings}
+                    variant="accent"
+                  >
+                    Update
+                  </Button>
+                </div>
+
                 <Heading alignSelf="flex-start">Collaborators</Heading>
 
                 <p>
@@ -96,7 +128,10 @@ const Settings = () => {
                       cancelLabel="Cancel"
                       onPrimaryAction={() => {}}
                     >
-                      <InputBox label="Invite" placeholder="Invite by email..." />
+                      <InputBox
+                        label="Invite"
+                        placeholder="Invite by email..."
+                      />
                     </AlertDialog>
                   </DialogTrigger>
                 </div>

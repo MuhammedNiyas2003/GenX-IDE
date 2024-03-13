@@ -6,6 +6,10 @@ const workspaceSchema = new mongoose.Schema(
       type: "string",
       required: true,
     },
+    desc: {
+      type: "string",
+      required: true,
+    },
     language: {
       type: "string",
       required: true,

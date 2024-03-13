@@ -17,6 +17,7 @@ const CreateProject = () => {
   const [projectName, setProjectName] = useState("");
   const [language, setLanguage] = useState("");
   const [workspaceId, setWorkspaceId] = useState("");
+  const [desc, setDesc] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,6 +32,7 @@ const CreateProject = () => {
     try {
       const workspaceData = {
         name: projectName,
+        desc,
         language,
         admin: _id,
         collaborators: [_id],
@@ -44,7 +46,6 @@ const CreateProject = () => {
       if (status === "SUCESS") {
         console.log(data);
         dispatch(setCurrentWorkspace(data));
-<<<<<<< HEAD
         try {
           const response = await axios.get(
             `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${data._id}`
@@ -53,8 +54,6 @@ const CreateProject = () => {
         } catch (error) {
           console.log(error);
         }
-=======
->>>>>>> e64db85e8ef77558384cee98435641d27b7b708f
         socket.emit("room:join", { email, room: data._id });
       }
     } catch (error) {
@@ -127,6 +126,13 @@ const CreateProject = () => {
                 type="text"
                 value={projectName}
                 setValue={setProjectName}
+              />
+              <InputBox
+                label="Description"
+                placeholder="Write about the project..."
+                type="text"
+                value={desc}
+                setValue={setDesc}
               />
               <InputBox
                 label="Language"
