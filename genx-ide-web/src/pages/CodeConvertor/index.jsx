@@ -22,11 +22,14 @@ const CodeConvertor = () => {
     };
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/openai/covert-code`,
+        `${import.meta.env.VITE_SERVER_URL}/api/geminiai/convert-code`,
         formData
       );
-      console.log(response);
-      setGeneratedCode(response.data);
+
+      const { status, data } = response.data;
+      if (status === "SUCCESS") {
+        setGeneratedCode(data);
+      }
       return;
     } catch (error) {
       console.log(error);
@@ -35,10 +38,6 @@ const CodeConvertor = () => {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    console.log(sourceCode, source, destination);
-  }, [sourceCode, source, destination]);
 
   return (
     <div className="codeconverter-container">
@@ -58,8 +57,8 @@ const CodeConvertor = () => {
       <div className="editor-window-container">
         <CodeWindow setValue={setSourceCode} value={sourceCode} size="half" />
         <CodeWindow
-          // setValue={setGeneratedCode}
-          // value={generatedCode}
+          setValue={setGeneratedCode}
+          value={generatedCode}
           size="half"
         />
       </div>

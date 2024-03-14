@@ -7,22 +7,38 @@ const CodeWindow = ({ value, setValue }) => {
     {
       id: "01",
       req: "Javascript",
-      value: "js",
     },
     {
       id: "02",
       req: "Python",
-      value: "py",
     },
     {
       id: "03",
       req: "Java",
-      value: "java",
     },
     {
       id: "04",
       req: "C++",
-      value: "c++",
+    },
+    {
+      id: "05",
+      req: "C",
+    },
+    {
+      id: "06",
+      req: "PHP",
+    },
+    {
+      id: "07",
+      req: "Go",
+    },
+    {
+      id: "08",
+      req: "Swift",
+    },
+    {
+      id: "09",
+      req: "R",
     },
   ];
   return (

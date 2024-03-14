@@ -12,6 +12,7 @@ import { Strategy as GitHubStrategy } from "passport-github2";
 import compilerRouter from "./routes/compiler.js";
 import authRouter from "./routes/auth.js";
 import openaiRouter from "./routes/openai.js";
+import geminiaiRouter from "./routes/geminiai.js";
 import workspaceRouter from "./routes/workspace.js";
 import fileFolderRouter from "./routes/fileFolder.js";
 import invitationRouter from "./routes/invitation.js";
@@ -121,6 +122,7 @@ io.on("connection", (socket) => {
 app.use("/api/compiler", compilerRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/openai", openaiRouter);
+app.use("/api/geminiai", geminiaiRouter);
 app.use("/api/workspace", workspaceRouter);
 app.use("/api/file-folder", fileFolderRouter);
 app.use("/api/invitation", invitationRouter);

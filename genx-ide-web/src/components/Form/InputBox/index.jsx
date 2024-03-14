@@ -12,6 +12,7 @@ const InputBox = ({
   LeftIcon,
   isFull,
   leftAction,
+  LeftItem,
   style,
 }) => {
   const [isShown, setIsShown] = useState(true);
@@ -44,6 +45,7 @@ const InputBox = ({
             <img src={LeftIcon} alt="" />
           </div>
         )}
+        {LeftItem && <LeftItem />}
       </div>
     </div>
   );
