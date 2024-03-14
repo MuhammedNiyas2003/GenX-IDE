@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../../Button";
 import "./style.scss";
 // redux
 import { setLogout } from "../../../state/reducers/authSlice";
@@ -13,9 +12,10 @@ import {
   Heading,
   Divider,
   AlertDialog,
-  Well,
 } from "@adobe/react-spectrum";
+//comp
 import Spotify from "../../Spotify";
+//icons
 import {
   forwardIcon,
   pauseIcon,
@@ -25,7 +25,9 @@ import {
 
 const BottomBar = () => {
   const { loggedIn } = useSelector((state) => state.spotify);
+
   const dispatch = useDispatch();
+
   const logoutHandler = () => {
     dispatch(setLogout());
     dispatch(setLogoutSpotify());

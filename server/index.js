@@ -14,6 +14,7 @@ import authRouter from "./routes/auth.js";
 import openaiRouter from "./routes/openai.js";
 import workspaceRouter from "./routes/workspace.js";
 import fileFolderRouter from "./routes/fileFolder.js";
+import invitationRouter from "./routes/invitation.js";
 // models
 import User from "./models/User.js";
 import session from "cookie-session";
@@ -122,6 +123,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/openai", openaiRouter);
 app.use("/api/workspace", workspaceRouter);
 app.use("/api/file-folder", fileFolderRouter);
+app.use("/api/invitation", invitationRouter);
 
 //db connection
 mongoose.set("strictQuery", true);

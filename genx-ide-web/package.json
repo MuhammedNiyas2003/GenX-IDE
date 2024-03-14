@@ -14,6 +14,7 @@
     "@excalidraw/excalidraw": "^0.16.1",
     "@monaco-editor/react": "^4.6.0",
     "@react-spectrum/dropzone": "^3.0.0-rc.1",
+    "@react-spectrum/toast": "^3.0.0-beta.10",
     "@reduxjs/toolkit": "^2.0.1",
     "@spectrum-css/treeview": "^9.2.6",
     "@spectrum-css/vars": "^9.0.8",

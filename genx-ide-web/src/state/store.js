@@ -11,6 +11,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { thunk } from "redux-thunk";
 import workspaceReducer from "./reducers/workspaceSlice.js";
 import spotifyReducer from "./reducers/spotifySlice.js";
+import notificationReducer from "./reducers/notificationSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   workspace: workspaceReducer,
   spotify: spotifyReducer,
+  notification: notificationReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

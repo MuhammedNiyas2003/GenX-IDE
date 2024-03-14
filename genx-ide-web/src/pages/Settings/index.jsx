@@ -1,6 +1,6 @@
 import "./style.scss";
 import { useState } from "react";
-import Header from "../../components/Header/index.jsx";
+//spectrum
 import {
   AlertDialog,
   Button,
@@ -13,24 +13,30 @@ import {
   Text,
   Well,
 } from "@adobe/react-spectrum";
-import InputBox from "../../components/Form/InputBox/index.jsx";
+import { ToastQueue } from "@react-spectrum/toast";
 // api
 import axios from "axios";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setCurrentWorkspace } from "../../state/reducers/workspaceSlice.js";
+// comp
+import Header from "../../components/Header/index.jsx";
+import InputBox from "../../components/Form/InputBox/index.jsx";
 
 const Settings = () => {
   const [name, setName] = useState("Student Guard");
   const [desc, setDesc] = useState("Lorem ipsum dolor sit amet.");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
 
+  const [inviteEmail, setInviteEmail] = useState("");
+
   const [isUpdating, setIsUpdating] = useState(false);
 
   const { currentWorkspace: workspace } = useSelector(
     (state) => state.workspace
   );
+  const { _id, name: fromName } = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     setName(workspace.name);
@@ -60,6 +66,26 @@ const Settings = () => {
       console.log(err);
     } finally {
       setIsUpdating(false);
+    }
+  };
+  const sendInvitation = async () => {
+    const bodyData = {
+      workspaceId: workspace._id,
+      fromId: _id,
+      email: inviteEmail,
+      fromName,
+    };
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/invitation/send`,
+        bodyData
+      );
+      const { status } = response.data;
+      if (status === "SUCESS")
+        ToastQueue.positive("Toast is done!", { timeout: 3000 });
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -126,11 +152,13 @@ const Settings = () => {
                       title="Invite Collaborator"
                       primaryActionLabel="Invite"
                       cancelLabel="Cancel"
-                      onPrimaryAction={() => {}}
+                      onPrimaryAction={sendInvitation}
                     >
                       <InputBox
                         label="Invite"
                         placeholder="Invite by email..."
+                        value={inviteEmail}
+                        setValue={setInviteEmail}
                       />
                     </AlertDialog>
                   </DialogTrigger>
