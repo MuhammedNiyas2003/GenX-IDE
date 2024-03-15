@@ -4,6 +4,7 @@ import { FaList, FaRegFolder, FaRegFolderOpen } from "react-icons/fa";
 import TreeView from "react-accessible-treeview";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentCode } from "../../../state/reducers/workspaceSlice";
+import { useEffect } from "react";
 
 function Explorer() {
   const dispatch = useDispatch();
@@ -33,10 +34,15 @@ function Explorer() {
 
     return result;
   }
-  const flatStructure = flattenStructure(fileFolders);
+  let flatStructure;
+  useEffect(() => {
+    flatStructure = flattenStructure(fileFolders);
+    console.log("file",flatStructure)
+  }, []);
 
   const onFileSelect = (element) => {
     if (element.type === "file") {
+      console.log(element)
       dispatch(setCurrentCode(element.code));
       console.log(element.type, element.code);
     }
@@ -46,7 +52,7 @@ function Explorer() {
     <div>
       <div className="directory">
         <TreeView
-          data={flatStructure}
+          data={fileFolders}
           aria-label="file-folders-tree"
           onNodeSelect={({ element }) => onFileSelect(element)}
           nodeRenderer={({
@@ -63,10 +69,10 @@ function Explorer() {
                 <FileIcon filename={element.name} />
               )}
 
-                {element.name}
-              </div>
-            )}
-          />
+              {element.name}
+            </div>
+          )}
+        />
       </div>
     </div>
   );

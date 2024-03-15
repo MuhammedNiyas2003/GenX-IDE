@@ -50,7 +50,7 @@ const CreateProject = () => {
           const response = await axios.get(
             `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${data._id}`
           );
-          dispatch(setFileFolder(response.data));
+          dispatch(setFileFolder(response.data.data));
         } catch (error) {
           console.log(error);
         }
@@ -78,7 +78,16 @@ const CreateProject = () => {
       if (status === "SUCESS") {
         console.log(data);
         dispatch(setCurrentWorkspace(data));
-        socket.emit("room:join", { email, room: data._id });
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${data._id}`
+          );
+          dispatch(setFileFolder(response.data.data));
+        } catch (error) {
+          console.log(error);
+        }
+
+        socket.emit("room:join", { email, room: data?._id });
       }
     } catch (error) {
       console.log(error);

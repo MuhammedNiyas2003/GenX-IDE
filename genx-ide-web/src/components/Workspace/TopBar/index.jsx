@@ -88,7 +88,7 @@ const TopBar = () => {
             {notifications?.map(({ _id, type }) => (
               // <NotificationItem />
               <>
-              <View>
+              <View key={_id}>
                 <p>{_id}</p>
                 {type === "invite" && (
                   <>
