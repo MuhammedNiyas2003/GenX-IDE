@@ -12,6 +12,7 @@ import { thunk } from "redux-thunk";
 import workspaceReducer from "./reducers/workspaceSlice.js";
 import spotifyReducer from "./reducers/spotifySlice.js";
 import notificationReducer from "./reducers/notificationSlice.js";
+import contextMenuReducer from "./reducers/contextMenuSlice.js";
 
 const persistConfig = {
   key: "root",
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   workspace: workspaceReducer,
   spotify: spotifyReducer,
   notification: notificationReducer,
+  contextMenu: contextMenuReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

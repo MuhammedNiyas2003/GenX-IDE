@@ -1,14 +1,27 @@
+import { useEffect, useState } from "react";
 import "./style.scss";
 import { DiCss3, DiJavascript, DiNpm } from "react-icons/di";
 import { FaList, FaRegFolder, FaRegFolderOpen } from "react-icons/fa";
 import TreeView from "react-accessible-treeview";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentCode } from "../../../state/reducers/workspaceSlice";
-import { useEffect } from "react";
+//adobe spectrum
+import {
+  ActionMenu,
+  Section,
+  Item,
+  MenuTrigger,
+  ActionButton,
+  Menu,
+} from "@adobe/react-spectrum";
+import RightClick from "../ContextMenu";
+import { setPoints } from "../../../state/reducers/contextMenuSlice";
 
 function Explorer() {
   const dispatch = useDispatch();
+
   const { fileFolders } = useSelector((state) => state.workspace);
+  const [isVisible, setIsVisible] = useState(true);
 
   function flattenStructure(node, idCounter = { value: 0 }, parentId = null) {
     const flatNode = {
@@ -37,17 +50,21 @@ function Explorer() {
   let flatStructure;
   useEffect(() => {
     flatStructure = flattenStructure(fileFolders);
-    console.log("file",flatStructure)
+    console.log("file", flatStructure);
   }, []);
 
   const onFileSelect = (element) => {
     if (element.type === "file") {
-      console.log(element)
+      console.log(element);
       dispatch(setCurrentCode(element.code));
       console.log(element.type, element.code);
     }
   };
 
+  const createFileFolderHandler = (e, element) => {
+    e.preventDefault();
+    dispatch(setPoints({ x: e.pageX, y: e.pageY }));
+  };
   return (
     <div>
       <div className="directory">
@@ -62,7 +79,11 @@ function Explorer() {
             getNodeProps,
             level,
           }) => (
-            <div {...getNodeProps()} style={{ paddingLeft: 20 * (level - 1) }}>
+            <div
+              onContextMenu={(e) => createFileFolderHandler(e, element)}
+              {...getNodeProps()}
+              style={{ paddingLeft: 20 * (level - 1) }}
+            >
               {isBranch ? (
                 <FolderIcon isOpen={isExpanded} />
               ) : (
