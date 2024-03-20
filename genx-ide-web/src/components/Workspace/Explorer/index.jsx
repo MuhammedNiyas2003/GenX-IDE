@@ -55,15 +55,13 @@ function Explorer() {
 
   const onFileSelect = (element) => {
     if (element.type === "file") {
-      console.log(element);
       dispatch(setCurrentCode(element.code));
-      console.log(element.type, element.code);
     }
   };
 
-  const createFileFolderHandler = (e, element) => {
+  const setSeletedElement = (e, element) => {
     e.preventDefault();
-    dispatch(setPoints({ x: e.pageX, y: e.pageY }));
+    dispatch(setPoints({ x: e.pageX, y: e.pageY, item: element }));
   };
   return (
     <div>
@@ -80,7 +78,7 @@ function Explorer() {
             level,
           }) => (
             <div
-              onContextMenu={(e) => createFileFolderHandler(e, element)}
+              onContextMenu={(e) => setSeletedElement(e, element)}
               {...getNodeProps()}
               style={{ paddingLeft: 20 * (level - 1) }}
             >
