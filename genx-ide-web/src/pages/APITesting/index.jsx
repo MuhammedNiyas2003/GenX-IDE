@@ -10,7 +10,11 @@ import {
   Tabs,
   Button,
   ActionButton,
+  Heading,
 } from "@adobe/react-spectrum";
+import Header from "../../components/Header/index.jsx";
+import { Editor } from "@monaco-editor/react";
+import KeyValue from "../../components/KeyValue/index.jsx";
 
 const APITesting = () => {
   const [url, setUrl] = useState("");
@@ -19,74 +23,114 @@ const APITesting = () => {
       id: "01",
       req: "GET",
       value: "GET",
-      color: "green",
     },
     {
       id: "02",
       req: "POST",
       value: "POST",
-      color: "red",
     },
     {
       id: "03",
       req: "PUT",
       value: "PUT",
-      color: "yellow",
     },
     {
       id: "04",
       req: "DELETE",
-      color: "blue",
     },
   ];
   return (
     <div className="api-container">
+      <Header leftItem={<Heading level={3}>Test your API</Heading>} />
+
       <InputBox
-        label="test"
-        placeholder="test"
+        placeholder="Enter URL or paste text"
         type="text"
         value={url}
         setUrl={setUrl}
         RightItem={() => <SelectBox data={reqList} />}
+        LeftItem={() => (
+          <Button variant="cta" marginEnd={10}>
+            Send
+          </Button>
+        )}
       />
       <div className="api-card">
         <Tabs aria-label="History of Ancient Rome">
           <TabList>
-            <Item key="prams">Prams</Item>
-            <Item key="authorisation">Authorisation</Item>
+            <Item key="params">Query params</Item>
             <Item key="Headers">Headers</Item>
             <Item key="Body">Body</Item>
-            <Item key="Settings">Settings</Item>
-            <Item key="Test">Test</Item>
           </TabList>
           <TabPanels
-            marginTop={120}
+            marginTop={20}
             UNSAFE_style={{
               display: "flex",
               alignItems: "center",
               flexDirection: "column",
             }}
           >
-            <Item key="prams">
-              <h1>PRAMS</h1>
-            </Item>
-            <Item key="authorisation">
-              <h1>Authorisation</h1>
+            <Item key="params">
+              <div className="params-body">
+                <KeyValue />
+                <KeyValue />
+              </div>
             </Item>
             <Item key="Headers">
-              <h1 >Header</h1>
+              <div className="params-body">
+                <KeyValue />
+              </div>
             </Item>
             <Item key="Body">
-              <h1>Body</h1>
-            </Item>
-            <Item key="Settings">
-              <h1>Settings</h1>
-            </Item>
-            <Item key="Test">
-              <h1>Test</h1>
+              <Editor
+                height="20vh"
+                width="100%"
+                defaultLanguage="javascript"
+                // value={response}
+                theme="vs-dark"
+                options={{
+                  mouseWheelScrollSensitivity: 0.5,
+                }}
+              />
             </Item>
           </TabPanels>
         </Tabs>
+      </div>
+      <div className="api-response-container">
+        <Header leftItem={<Heading level={3}>Response</Heading>} />
+        <p>Status: 200 Time: 2008 Size: 183 B</p>
+        <div className="api-response-card">
+          <Tabs aria-label="History of Ancient Rome">
+            <TabList>
+              <Item key="response-body">Response body</Item>
+              <Item key="response-headers">Response Headers</Item>
+            </TabList>
+            <TabPanels
+              marginTop={10}
+              UNSAFE_style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <Item key="response-body">
+                <Editor
+                  height="20vh"
+                  width="100%"
+                  defaultLanguage="javascript"
+                  // value={response}
+                  theme="vs-dark"
+                  options={{
+                    mouseWheelScrollSensitivity: 0.5,
+                  }}
+                />
+              </Item>
+              <Item key="reponse-header">
+                <h1>Header</h1>
+              </Item>
+            </TabPanels>
+          </Tabs>
+        </div>
       </div>
     </div>
   );

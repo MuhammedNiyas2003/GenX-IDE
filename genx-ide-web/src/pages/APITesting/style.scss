@@ -1,11 +1,26 @@
-@import '../../styles/colors.scss';
-.api-container{
-    background-color: $primary;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+@import "../../styles/colors.scss";
+.api-container {
+  background-color: $primary;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.api-card{
+.api-card {
+  width: 90%;
+}
+.api-response-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .api-response-card {
     width: 90%;
+  }
+}
+
+.params-body {
+  // background-color:red;
+  width: 100%;
+  min-height: 100px;
 }

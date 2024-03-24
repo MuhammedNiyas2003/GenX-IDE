@@ -1,10 +1,5 @@
 import "./style.scss";
 //spectrum
-import { Breadcrumbs, Item } from "@adobe/react-spectrum";
-//comp
-import InputBox from "../Form/InputBox";
-//icons
-import { searchIcon } from "../../contants/icons";
 const Header = ({ leftItem, rightItem }) => {
   return (
     <div className="header-container">
