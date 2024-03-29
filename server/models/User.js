@@ -19,6 +19,12 @@ const userSchema = new mongoose.Schema(
       unique: true,
       sparse: true,
     },
+    mouseX: {
+      type: String,
+    },
+    mouseY: {
+      type: String,
+    },
     imageUrl: {
       type: String,
     },

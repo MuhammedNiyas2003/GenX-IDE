@@ -12,12 +12,14 @@ import {
   Provider as SpectrumProvider,
 } from "@adobe/react-spectrum";
 import { ToastContainer } from "@react-spectrum/toast";
+import RemoteCursor from "./components/RemoteCursor/index.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <SpectrumProvider theme={defaultTheme}>
+          <RemoteCursor />
           <ToastContainer />
           <App />
         </SpectrumProvider>

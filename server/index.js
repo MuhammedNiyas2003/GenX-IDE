@@ -116,6 +116,30 @@ io.on("connection", (socket) => {
     console.log("peer:nego:done", ans);
     io.to(to).emit("peer:nego:final", { from: socket.id, ans });
   });
+
+  //share mouse pointer
+  socket.on(
+    "mouse-move",
+    async ({ mouseX, mouseY, userId, roomId, userName }) => {
+      console.log(mouseX, mouseY, userId);
+
+      // Get all sockets in the room except the sender's socket
+      const socketsInRoom = io.sockets.adapter.rooms.get(roomId);
+      const socketsExceptSender = socketsInRoom
+        ? [...socketsInRoom].filter((socketId) => socketId !== socket.id)
+        : [];
+
+      // Emit the message to all sockets except the sender's socket
+      socketsExceptSender.forEach((socketId) => {
+        io.to(socketId).emit("user-mouse", {
+          mouseX,
+          mouseY,
+          userId,
+          userName,
+        });
+      });
+    }
+  );
 });
 
 //routes
