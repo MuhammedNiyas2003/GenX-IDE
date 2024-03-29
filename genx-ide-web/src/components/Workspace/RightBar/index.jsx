@@ -11,7 +11,7 @@ const RightBar = () => {
   const expandWindow = () => {
     const tl = gsap.timeline();
     tl.to(windowRef.current, {
-      width: windowRef.current.style.  width === "60px" ? 300 : 60,
+      width: windowRef.current.style.width === "60px" ? 300 : 60,
       ease: "power1.inOut",
       duration: 0.2,
     });
@@ -123,32 +123,39 @@ const RightBar = () => {
   return (
     <div ref={windowRef} className="rightbar-container">
       <button onClick={expandWindow}>expand</button>
-     
+
       <div>
         <p>Room Page</p>
         <h4>{remoteSocketId ? "Connected" : "No one in room"}</h4>
         {myStream && <button onClick={sendStreams}>Send Stream</button>}
         {remoteSocketId && <button onClick={handleCallUser}>CALL</button>}
         <div className="video-items">
-        {myStream && (
-          <>
-            {/* <h1>My Stream</h1> */}
-            <div className="video-item">
-            <ReactPlayer playing height="100%" width="100%" url={myStream} />
-            </div>
-
-          </>
-        )}
-        {remoteStream && (
-          <>
-            {/* <h1>Remote Stream</h1> */}
-            <div className="video-item">
-            <ReactPlayer playing height="100%" width="100%" url={remoteSocketId} />
-            </div>
-          </>
-        )}
-                </div>
-
+          {myStream && (
+            <>
+              {/* <h1>My Stream</h1> */}
+              <div className="video-item">
+                <ReactPlayer
+                  playing
+                  height="100%"
+                  width="100%"
+                  url={myStream}
+                />
+              </div>
+            </>
+          )}
+          {remoteStream && (
+            <>
+              <p>Remote Stream</p>
+              <ReactPlayer
+                playing
+                muted
+                height="100%"
+                width="100%"
+                url={remoteStream}
+              />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
