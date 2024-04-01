@@ -48,7 +48,7 @@ const APITesting = () => {
         type="text"
         value={url}
         setUrl={setUrl}
-        RightItem={() => <SelectBox data={reqList} />}
+        RightItem={() => <SelectBox options={reqList} />}
         LeftItem={() => (
           <Button variant="cta" marginEnd={10}>
             Send

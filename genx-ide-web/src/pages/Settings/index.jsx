@@ -110,9 +110,7 @@ const Settings = () => {
               <div className="general-form">
                 <Heading alignSelf="flex-start">Project Settings</Heading>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi odio, ullam perspiciatis et atque at officiis nam vero
-                  sed ipsam.
+                Modify project name and description easily.
                 </p>
                 <Heading alignSelf="flex-start">Basic details</Heading>
                 <InputBox isFull value={name} setValue={setName} label="Name" />
@@ -141,8 +139,8 @@ const Settings = () => {
                 <Heading alignSelf="flex-start">Collaborators</Heading>
 
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Commodi odio,
+                  Invite collaborators via email for efficient workspace
+                  collaboration
                 </p>
                 <div className="general-add-btn">
                   <DialogTrigger>

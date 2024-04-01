@@ -1,20 +1,36 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import "./style.scss";
 import { gsap } from "gsap";
-import InputBox from "../../Form/InputBox";
-import Button from "../../Button";
+//video conference
 import socket from "../../../utils/socket/socket";
 import peer from "../../../service/peer.js";
 import ReactPlayer from "react-player";
+//adobe icons
+import ChevronDoubleLeft from "@spectrum-icons/workflow/ChevronDoubleLeft";
+import ChevronDoubleRight from "@spectrum-icons/workflow/ChevronDoubleRight";
+import { ActionButton } from "@adobe/react-spectrum";
+
 const RightBar = () => {
   const windowRef = useRef(null);
-  const expandWindow = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleWindowHandler = (state) => {
     const tl = gsap.timeline();
-    tl.to(windowRef.current, {
-      width: windowRef.current.style.width === "60px" ? 300 : 60,
-      ease: "power1.inOut",
-      duration: 0.2,
-    });
+
+    if (state === "open") {
+      tl.to(windowRef.current, {
+        width: 300,
+        ease: "power1.inOut",
+        duration: 0.2,
+      });
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+      tl.to(windowRef.current, {
+        width: 60,
+        ease: "power1.inOut",
+        duration: 0.2,
+      });
+    }
   };
   // socket
   const [remoteSocketId, setRemoteSocketId] = useState(null);
@@ -122,7 +138,19 @@ const RightBar = () => {
   ]);
   return (
     <div ref={windowRef} className="rightbar-container">
-      <button onClick={expandWindow}>expand</button>
+      <div className="right-bar-toggle">
+        {isOpen ? (
+          <ActionButton onClick={() => toggleWindowHandler("close")} isQuiet>
+            <ChevronDoubleRight />
+          </ActionButton>
+        ) : (
+          <>
+            <ActionButton onClick={() => toggleWindowHandler("open")} isQuiet>
+              <ChevronDoubleLeft />
+            </ActionButton>
+          </>
+        )}
+      </div>
 
       <div>
         <p>Room Page</p>
@@ -132,7 +160,6 @@ const RightBar = () => {
         <div className="video-items">
           {myStream && (
             <>
-              {/* <h1>My Stream</h1> */}
               <div className="video-item">
                 <ReactPlayer
                   playing
@@ -145,14 +172,14 @@ const RightBar = () => {
           )}
           {remoteStream && (
             <>
-              <p>Remote Stream</p>
-              <ReactPlayer
-                playing
-                muted
-                height="100%"
-                width="100%"
-                url={remoteStream}
-              />
+              <div className="video-item">
+                <ReactPlayer
+                  playing
+                  height="100%"
+                  width="100%"
+                  url={remoteStream}
+                />
+              </div>
             </>
           )}
         </div>

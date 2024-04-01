@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import socket from "../../utils/socket/socket";
 import { useSelector } from "react-redux";
+import { arrowIcon } from "../../contants/icons";
 
 const RemoteCursor = () => {
   const { loggedIn } = useSelector((state) => state.auth);
@@ -74,16 +75,17 @@ const RemoteCursor = () => {
         <div
           key={userId}
           style={{
-            width: "20px",
-            height: "20px",
+            // width: "20px",
+            // height: "20px",
+            // backgroundColor: "gray",
             borderRadius: "50%",
-            backgroundColor: "gray",
             position: "absolute",
             left: mouseX,
             top: mouseY,
             zIndex: 99,
           }}
         >
+          <img src={arrowIcon} style={{ width: '20px'}} alt="" />
           <p style={{ fontSize: "12px" }}>{userName}</p>
         </div>
       ))}

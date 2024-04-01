@@ -13,6 +13,7 @@ import spotifyIcon from "../assets/icons/spotify/spotify.png";
 import forwardIcon from "../assets/icons/spotify/forward.png";
 import pauseIcon from "../assets/icons/spotify/pause.png";
 import rewindIcon from "../assets/icons/spotify/rewind.png";
+import arrowIcon from "../assets/icons/mouse/arrow.png";
 
 export {
   docIcon,
@@ -29,6 +30,7 @@ export {
   settingsIcon,
   aiIcon,
   generatorIcon,
+  arrowIcon
 };
 
 //logos

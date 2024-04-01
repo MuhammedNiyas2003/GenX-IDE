@@ -86,7 +86,9 @@ const getNotification = async (req, res) => {
     const userExist = await User.findById(userId);
 
     if (userExist) {
-      const notifications = await Invitation.find({ userId });
+      const notifications = await Invitation.find({ userId }).sort({
+        createdAt:-1
+      });
       console.log(notifications);
       res.json({
         status: "SUCESS",
@@ -120,7 +122,9 @@ const deleteNotification = async (req, res) => {
     });
     if (userId) {
       // return existing user notifications
-      const userNotifications = await Invitation.find({ userId });
+      const userNotifications = await Invitation.find({ userId }).sort({
+        createdAt:-1
+      });
 
       res.json({
         status: "SUCCESS",

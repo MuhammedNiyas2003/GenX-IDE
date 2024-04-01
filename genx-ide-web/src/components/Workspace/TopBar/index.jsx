@@ -61,7 +61,6 @@ const TopBar = () => {
       );
       const { status, data } = response.data;
       if (status === "SUCCESS") {
-
         dispatch(setNotifications(data));
       }
     } catch (error) {
@@ -85,25 +84,15 @@ const TopBar = () => {
           <Heading>Notifications</Heading>
           <Divider />
           <Content>
-            {notifications?.map(({ _id, type }) => (
-              // <NotificationItem />
+            {notifications?.map((notification) => (
               <>
-              <View key={_id}>
-                <p>{_id}</p>
-                {type === "invite" && (
-                  <>
-                    <Button
-                    size="L"
-                      onPress={() => approveHandler(_id)}
-                      variant="accent"
-                    >
-                      Approve
-                    </Button>
-                    <Button onPress={() => rejectHandler(_id)}>Reject</Button>
-                  </>
-                )}
-              </View>
-              <Divider />
+                <NotificationItem
+                  key={notification._id}
+                  onReject={() => rejectHandler(notification?._id)}
+                  onApprove={() => approveHandler(notification?._id)}
+                  {...notification}
+                />
+                <Divider size="S" />
               </>
             ))}
           </Content>

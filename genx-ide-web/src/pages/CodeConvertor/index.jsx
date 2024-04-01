@@ -5,6 +5,83 @@ import Header from "../../components/Header/index.jsx";
 import CodeWindow from "../../components/CodeWindow/index.jsx";
 import { Button, Heading as SpectrumHeader } from "@adobe/react-spectrum";
 
+const sourcelanguages = [
+  {
+    id: "01",
+    req: "Javascript",
+  },
+  {
+    id: "02",
+    req: "Python",
+  },
+  {
+    id: "03",
+    req: "Java",
+  },
+  {
+    id: "04",
+    req: "C++",
+  },
+  {
+    id: "05",
+    req: "C",
+  },
+  {
+    id: "06",
+    req: "PHP",
+  },
+  {
+    id: "07",
+    req: "Go",
+  },
+  {
+    id: "08",
+    req: "Swift",
+  },
+  {
+    id: "09",
+    req: "R",
+  },
+];
+const destinationlanguages = [
+  {
+    id: "01",
+    req: "Python",
+  },
+  {
+    id: "02",
+    req: "Javascript",
+  },
+  {
+    id: "03",
+    req: "Java",
+  },
+  {
+    id: "04",
+    req: "C++",
+  },
+  {
+    id: "05",
+    req: "C",
+  },
+  {
+    id: "06",
+    req: "PHP",
+  },
+  {
+    id: "07",
+    req: "Go",
+  },
+  {
+    id: "08",
+    req: "Swift",
+  },
+  {
+    id: "09",
+    req: "R",
+  },
+];
+
 const CodeConvertor = () => {
   const [sourceCode, setSourceCode] = useState(null);
   const [source, setSource] = useState("javascript");
@@ -39,6 +116,10 @@ const CodeConvertor = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(source, destination);
+  }, [source, destination]);
+
   return (
     <div className="codeconverter-container">
       <Header
@@ -55,11 +136,21 @@ const CodeConvertor = () => {
         }
       />
       <div className="editor-window-container">
-        <CodeWindow setValue={setSourceCode} value={sourceCode} size="half" />
+        <CodeWindow
+          options={sourcelanguages}
+          currentOption={source}
+          setCurrentOption={setSource}
+          size="half"
+          value={sourceCode}
+          setValue={setSourceCode}
+        />
         <CodeWindow
           setValue={setGeneratedCode}
           value={generatedCode}
           size="half"
+          options={destinationlanguages}
+          currentOption={destination}
+          setCurrentOption={setDestination}
         />
       </div>
     </div>

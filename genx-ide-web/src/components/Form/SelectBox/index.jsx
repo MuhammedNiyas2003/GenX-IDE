@@ -1,8 +1,8 @@
 import "./style.scss";
 import { useEffect, useState } from "react";
 
-const SelectBox = ({ data }) => {
-  const [selectedOption, setSelectedOption] = useState(data[0]);
+const SelectBox = ({ currentOption, setCurrentOption, options }) => {
+  const [selectedOption, setSelectedOption] = useState(options[0]);
   useEffect(() => {
     console.log(selectedOption.value);
   }, [selectedOption]);
@@ -11,10 +11,10 @@ const SelectBox = ({ data }) => {
     <select
       style={{}}
       className="selectbox-container"
-      onChange={(e) => setSelectedOption(e.target.value)}
+      onChange={(e) => setCurrentOption(e.target.value)}
     >
-      {data.map((item) => (
-        <option value={item.value}>{item.req}</option>
+      {options?.map((option) => (
+        <option value={option.value}>{option.req}</option>
       ))}
     </select>
   );
