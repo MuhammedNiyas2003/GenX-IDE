@@ -1,44 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style.scss";
 //comp
 import InputBox from "../../components/Form/InputBox";
 import SelectBox from "../../components/Form/SelectBox";
+import KeyValue from "../../components/KeyValue/index.jsx";
+import Header from "../../components/Header/index.jsx";
+
 import {
   Item,
   TabList,
   TabPanels,
   Tabs,
   Button,
-  ActionButton,
   Heading,
 } from "@adobe/react-spectrum";
-import Header from "../../components/Header/index.jsx";
-import { Editor } from "@monaco-editor/react";
-import KeyValue from "../../components/KeyValue/index.jsx";
+//uuid
+import { v4 as uuidv4 } from "uuid";
 
+import { Editor } from "@monaco-editor/react";
+
+const reqList = [
+  {
+    id: "01",
+    req: "GET",
+    value: "GET",
+  },
+  {
+    id: "02",
+    req: "POST",
+    value: "POST",
+  },
+  {
+    id: "03",
+    req: "PUT",
+    value: "PUT",
+  },
+  {
+    id: "04",
+    req: "DELETE",
+  },
+];
 const APITesting = () => {
   const [url, setUrl] = useState("");
-  const reqList = [
+  const [selectedReq, setSelectedReq] = useState("");
+
+  //query params
+  const [queryParams, setQueryParams] = useState([
     {
-      id: "01",
-      req: "GET",
-      value: "GET",
+      id: uuidv4(),
+      key: "12",
+      value: "21",
     },
-    {
-      id: "02",
-      req: "POST",
-      value: "POST",
-    },
-    {
-      id: "03",
-      req: "PUT",
-      value: "PUT",
-    },
-    {
-      id: "04",
-      req: "DELETE",
-    },
-  ];
+  ]);
+  //headers
+  const [headers, setHeaders] = useState({});
+
+  useEffect(() => {
+    console.log(selectedReq);
+  }, [selectedReq]);
+
   return (
     <div className="api-container">
       <Header leftItem={<Heading level={3}>Test your API</Heading>} />
@@ -48,7 +68,13 @@ const APITesting = () => {
         type="text"
         value={url}
         setUrl={setUrl}
-        RightItem={() => <SelectBox options={reqList} />}
+        RightItem={() => (
+          <SelectBox
+            currentOption={selectedReq}
+            setCurrentOption={setSelectedReq}
+            options={reqList}
+          />
+        )}
         LeftItem={() => (
           <Button variant="cta" marginEnd={10}>
             Send
@@ -72,8 +98,14 @@ const APITesting = () => {
           >
             <Item key="params">
               <div className="params-body">
-                <KeyValue />
-                <KeyValue />
+                {queryParams.map((item, index) => (
+                  <KeyValue
+                    item={item}
+                    key={index}
+                    params={queryParams}
+                    setParams={setQueryParams}
+                  />
+                ))}
               </div>
             </Item>
             <Item key="Headers">

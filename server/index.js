@@ -121,7 +121,6 @@ io.on("connection", (socket) => {
   socket.on(
     "mouse-move",
     async ({ mouseX, mouseY, userId, roomId, userName }) => {
-      console.log(mouseX, mouseY, userId);
 
       // Get all sockets in the room except the sender's socket
       const socketsInRoom = io.sockets.adapter.rooms.get(roomId);
