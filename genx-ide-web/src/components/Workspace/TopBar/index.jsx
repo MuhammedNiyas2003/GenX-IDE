@@ -15,9 +15,9 @@ import {
 import Bell from "@spectrum-icons/workflow/Bell";
 // redux
 import { useDispatch, useSelector } from "react-redux";
+import { setNotifications } from "../../../state/reducers/notificationSlice";
 //comp
 import NotificationItem from "../../NotificationItem";
-import { setNotifications } from "../../../state/reducers/notificationSlice";
 
 const TopBar = () => {
   const { name, _id } = useSelector((state) => state.auth.user);

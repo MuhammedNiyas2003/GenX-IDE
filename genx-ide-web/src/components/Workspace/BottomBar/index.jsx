@@ -68,8 +68,7 @@ const BottomBar = () => {
             cancelLabel="Cancel"
             onPrimaryAction={logoutHandler}
           >
-            Connect your spotify account ( The spotify account should be added
-            to the dashboard and premium ⚠️ )
+            Logout your account from genx
           </AlertDialog>
         </DialogTrigger>
       </div>
