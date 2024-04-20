@@ -2,7 +2,7 @@ import SelectBox from "../Form/SelectBox";
 import "./style.scss";
 import { Editor } from "@monaco-editor/react";
 
-const CodeWindow = ({ currentOption, setCurrentOption, options,value }) => {
+const CodeWindow = ({ currentOption, setCurrentOption, options,value,setValue }) => {
   return (
     <div className="codewindow-container">
       <div className="codewindow-action-container">

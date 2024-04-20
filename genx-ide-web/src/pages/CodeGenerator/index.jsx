@@ -21,8 +21,10 @@ const CodeGenerator = () => {
         );
 
         const { status, data } = response.data;
+        console.log(status)
         if (status === "SUCCESS") {
           setResponse(data);
+          console.log(data)
         }
         return;
       }
