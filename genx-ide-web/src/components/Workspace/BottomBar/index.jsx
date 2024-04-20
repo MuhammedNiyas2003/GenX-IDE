@@ -33,9 +33,13 @@ const BottomBar = () => {
     dispatch(setLogoutSpotify());
   };
 
+
+  const redirect_uri = `${import.meta.env.VITE_CLIENT_URL}/workspace`
+  console.log(redirect_uri,"url")
   const spotifyLoginHandler = () => {
     const client_id = "af711a8074794d1cb9dcf724638c0123";
-    const redirect_uri = `${import.meta.env.CLIENT_URL}/workspace`;
+    
+    
     const api_uri = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-private",
