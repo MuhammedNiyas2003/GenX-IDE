@@ -7,9 +7,10 @@ const NotificationItem = ({
   onApprove,
   fromName,
   workspaceId,
+  key
 }) => {
   return (
-    <View key={_id} UNSAFE_style={{ margin: "1rem 0" }}>
+    <View key={key} UNSAFE_style={{ margin: "1rem 0" }}>
       <p>{fromName} had invited you to become a member of</p>
       {type === "invite" && (
         <div style={{ margin: "1rem 0" }}>

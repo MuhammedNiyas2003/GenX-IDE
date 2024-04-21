@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./style.scss";
+import axios from "axios";
+import prettyBytes from "pretty-bytes";
 //comp
 import InputBox from "../../components/Form/InputBox";
 import SelectBox from "../../components/Form/SelectBox";
@@ -14,9 +16,7 @@ import {
   Button,
   Heading,
 } from "@adobe/react-spectrum";
-//uuid
-import { v4 as uuidv4 } from "uuid";
-
+//monaco
 import { Editor } from "@monaco-editor/react";
 
 const reqList = [
@@ -41,23 +41,108 @@ const reqList = [
   },
 ];
 const APITesting = () => {
-  const [url, setUrl] = useState("");
-  const [selectedReq, setSelectedReq] = useState("");
-
-  //query params
+  const [isLoading, setIsLoading] = useState(false);
+  const [url, setUrl] = useState("https://jsonplaceholder.org/posts");
+  const [selectedReq, setSelectedReq] = useState("GET");
+  // response state
+  const [status, setStatus] = useState(0);
+  const [time, setTime] = useState(0);
+  const [size, setSize] = useState(0);
+  const [response, setResponse] = useState(null);
+  const [responseHeaders, setResponseHeaders] = useState({});
+  //params state
+  const [body, setBody] = useState(null);
   const [queryParams, setQueryParams] = useState([
     {
-      id: uuidv4(),
-      key: "12",
-      value: "21",
+      key: "",
+      value: "",
     },
   ]);
-  //headers
-  const [headers, setHeaders] = useState({});
+  const [headerParams, setHeaderParams] = useState([
+    {
+      key: "",
+      value: "",
+    },
+  ]);
+  //  key value handlers
+  const handleAddParam = (type) => {
+    switch (type) {
+      case "query":
+        setQueryParams([...queryParams, { key: "", value: "" }]);
+        break;
+      case "header":
+        setHeaderParams([...headerParams, { key: "", value: "" }]);
+        break;
+    }
+  };
 
-  useEffect(() => {
-    console.log(selectedReq);
-  }, [selectedReq]);
+  const handleRemoveParam = (index, type) => {
+    switch (type) {
+      case "query":
+        setQueryParams(queryParams.filter((_, i) => i !== index));
+        break;
+      case "header":
+        setHeaderParams(headerParams.filter((_, i) => i !== index));
+        break;
+    }
+  };
+
+  const handleParamChange = (index, key, value, type) => {
+    switch (type) {
+      case "query":
+        setQueryParams((prevParams) =>
+          prevParams.map((param, i) => {
+            if (i === index) {
+              return { ...param, [key]: value };
+            }
+            return param;
+          })
+        );
+        break;
+      case "header":
+        setHeaderParams((prevParams) =>
+          prevParams.map((param, i) => {
+            if (i === index) {
+              return { ...param, [key]: value };
+            }
+            return param;
+          })
+        );
+        break;
+    }
+  };
+
+  // api call
+  const handleSendRequest = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios({
+        url,
+        method: selectedReq,
+        params: queryParams,
+        headers: headerParams,
+        body: JSON.parse(body),
+        validateStatus: () => true,
+      });
+      if (response) {
+        console.log("response",response)
+        setStatus(response.status);
+        setResponse(response.data);
+        setResponseHeaders(response.headers);
+        // setTime(response.customData.time);
+        setSize(
+          prettyBytes(
+            JSON.stringify(response.data).length +
+              JSON.stringify(response.headers).length
+          )
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="api-container">
@@ -67,7 +152,7 @@ const APITesting = () => {
         placeholder="Enter URL or paste text"
         type="text"
         value={url}
-        setUrl={setUrl}
+        setValue={setUrl}
         RightItem={() => (
           <SelectBox
             currentOption={selectedReq}
@@ -76,7 +161,12 @@ const APITesting = () => {
           />
         )}
         LeftItem={() => (
-          <Button variant="cta" marginEnd={10}>
+          <Button
+            isPending={isLoading}
+            variant="cta"
+            marginEnd={10}
+            onPress={handleSendRequest}
+          >
             Send
           </Button>
         )}
@@ -98,27 +188,41 @@ const APITesting = () => {
           >
             <Item key="params">
               <div className="params-body">
-                {queryParams.map((item, index) => (
+                {queryParams?.map((item, index) => (
                   <KeyValue
-                    item={item}
+                    type="query"
                     key={index}
-                    params={queryParams}
-                    setParams={setQueryParams}
+                    index={index}
+                    item={item}
+                    onChange={handleParamChange}
+                    onRemove={() => handleRemoveParam(index, "query")}
                   />
                 ))}
+                <Button onPress={() => handleAddParam("query")}>Add</Button>
               </div>
             </Item>
             <Item key="Headers">
               <div className="params-body">
-                <KeyValue />
+                {headerParams?.map((item, index) => (
+                  <KeyValue
+                    type="header"
+                    key={index}
+                    index={index}
+                    item={item}
+                    onChange={handleParamChange}
+                    onRemove={() => handleRemoveParam(index, "header")}
+                  />
+                ))}
+                <Button onPress={() => handleAddParam("header")}>Add</Button>
               </div>
             </Item>
             <Item key="Body">
               <Editor
                 height="20vh"
                 width="100%"
-                defaultLanguage="javascript"
-                // value={response}
+                defaultLanguage="json"
+                value={body}
+                onChange={(value) => setBody(value)}
                 theme="vs-dark"
                 options={{
                   mouseWheelScrollSensitivity: 0.5,
@@ -130,7 +234,9 @@ const APITesting = () => {
       </div>
       <div className="api-response-container">
         <Header leftItem={<Heading level={3}>Response</Heading>} />
-        <p>Status: 200 Time: 2008 Size: 183 B</p>
+        <p>
+          Status: {status} Time: {time}m Size: {size}
+        </p>
         <div className="api-response-card">
           <Tabs aria-label="History of Ancient Rome">
             <TabList>
@@ -149,7 +255,7 @@ const APITesting = () => {
                 <Editor
                   height="20vh"
                   width="100%"
-                  defaultLanguage="javascript"
+                  defaultLanguage="json"
                   // value={response}
                   theme="vs-dark"
                   options={{

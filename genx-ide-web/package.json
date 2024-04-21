@@ -23,6 +23,7 @@
     "install": "^0.13.0",
     "monaco-editor": "^0.43.0",
     "npm": "^10.2.0",
+    "pretty-bytes": "^6.1.1",
     "react": "^18.2.0",
     "react-accessible-treeview": "^2.8.3",
     "react-aria-components": "^1.0.1",

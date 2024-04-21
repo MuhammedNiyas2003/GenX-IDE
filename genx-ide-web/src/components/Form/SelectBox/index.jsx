@@ -9,8 +9,8 @@ const SelectBox = ({ currentOption, setCurrentOption, options }) => {
       onChange={(e) => setCurrentOption(e.target.value)}
       value={currentOption}
     >
-      {options?.map((option) => (
-        <option value={option.value}>{option.req}</option>
+      {options?.map((option,index) => (
+        <option key={index} value={option.value}>{option.req}</option>
       ))}
     </select>
   );
