@@ -23,12 +23,24 @@ const createWorkspace = async (req, res) => {
         type: "folder",
         workspaceId: workspaceCreated._id,
       });
-      await rootFile.save();
+      const rootFileCreated = await rootFile.save();
+      if (rootFileCreated) {
+        const exampleFile = new FileFolder({
+          name: "example.js",
+          type: "file",
+          workspaceId: workspaceCreated._id,
+          parentId: rootFileCreated._id,
+          code: "//write code here...",
+        });
+        const exampleFileCreated = await exampleFile.save();
+        if (exampleFileCreated) {
+          res.json({
+            status: "SUCESS",
+            data: workspaceCreated,
+          });
+        }
+      }
     }
-    res.json({
-      status: "SUCESS",
-      data: workspaceCreated,
-    });
   } catch (err) {
     console.log(err);
     res.json({
