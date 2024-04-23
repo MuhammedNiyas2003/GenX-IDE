@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style.scss";
 import axios from "axios";
 import prettyBytes from "pretty-bytes";
@@ -125,7 +125,6 @@ const APITesting = () => {
         validateStatus: () => true,
       });
       if (response) {
-        console.log("response",response)
         setStatus(response.status);
         setResponse(response.data);
         setResponseHeaders(response.headers);
@@ -143,6 +142,10 @@ const APITesting = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    console.log(response);
+  }, [response]);
 
   return (
     <div className="api-container">
@@ -253,13 +256,15 @@ const APITesting = () => {
             >
               <Item key="response-body">
                 <Editor
-                  height="20vh"
+                  height="30vh"
                   width="100%"
                   defaultLanguage="json"
-                  // value={response}
+                  value={JSON.stringify(response, null, 2)}
                   theme="vs-dark"
                   options={{
                     mouseWheelScrollSensitivity: 0.5,
+                    minimap: { enabled: false },
+
                   }}
                 />
               </Item>
