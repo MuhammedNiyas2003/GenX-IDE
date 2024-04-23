@@ -9,7 +9,7 @@ const Editor = () => {
         gutterSize={1}
         className="split"
         direction="vertical"
-        sizes={[80, 20]}
+        sizes={[70, 30]}
         style={{ width : '100%',height: "100%"}}
       >
         <CodeEditor />

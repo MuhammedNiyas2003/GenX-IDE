@@ -56,10 +56,14 @@ const Compiler = () => {
         </div>
       </div>
       {isCompiling && <p>compiling...</p>}
-      <p>Output : {output}</p>
-      <p>
-        Error : <span style={{ color: "red" }}>{error}</span>
-      </p>
+      {!isCompiling && (
+        <>
+          <p>Output : {output}</p>
+          <p>
+            Error : <span style={{ color: "red" }}>{error}</span>
+          </p>
+        </>
+      )}
     </div>
   );
 };
