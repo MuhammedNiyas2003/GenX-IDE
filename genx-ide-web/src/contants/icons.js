@@ -12,6 +12,7 @@ import searchIcon from "../assets/icons/form/search.png";
 import spotifyIcon from "../assets/icons/spotify/spotify.png";
 import forwardIcon from "../assets/icons/spotify/forward.png";
 import pauseIcon from "../assets/icons/spotify/pause.png";
+import playIcon from "../assets/icons/spotify/play.png";
 import rewindIcon from "../assets/icons/spotify/rewind.png";
 import arrowIcon from "../assets/icons/mouse/arrow.png";
 
@@ -25,6 +26,7 @@ export {
   spotifyIcon,
   forwardIcon,
   pauseIcon,
+  playIcon,
   rewindIcon,
   searchIcon,
   settingsIcon,

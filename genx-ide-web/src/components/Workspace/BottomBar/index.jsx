@@ -1,4 +1,6 @@
+import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import "./style.scss";
 // redux
 import { setLogout } from "../../../state/reducers/authSlice";
@@ -21,10 +23,13 @@ import {
   pauseIcon,
   rewindIcon,
   spotifyIcon,
+  playIcon,
 } from "../../../contants/icons";
 
 const BottomBar = () => {
-  const { loggedIn } = useSelector((state) => state.spotify);
+  const { loggedIn, token } = useSelector((state) => state.spotify);
+  const [currentPlaying, setCurrentPlaying] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -33,13 +38,10 @@ const BottomBar = () => {
     dispatch(setLogoutSpotify());
   };
 
-
-  const redirect_uri = `${import.meta.env.VITE_CLIENT_URL}/workspace`
-  console.log(redirect_uri,"url")
+  const redirect_uri = `${import.meta.env.VITE_CLIENT_URL}/workspace`;
   const spotifyLoginHandler = () => {
     const client_id = "af711a8074794d1cb9dcf724638c0123";
-    
-    
+
     const api_uri = "https://accounts.spotify.com/authorize";
     const scope = [
       "user-read-private",
@@ -54,6 +56,88 @@ const BottomBar = () => {
       " "
     )}&response_type=token&show_dialog=true`;
   };
+
+  // spotify actions
+
+  const getCurrentTrack = useCallback(async () => {
+    const response = await axios.get(
+      "https://api.spotify.com/v1/me/player/currently-playing",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    if (response.data !== "") {
+      const currentPlaying = {
+        id: response.data.item.id,
+        name: response.data.item.name,
+        artists: response.data.item.artists.map((artist) => artist.name),
+        image: response.data.item.album.images[2].url,
+      };
+      setCurrentPlaying(currentPlaying);
+    } else {
+      console.log("no current playing");
+    }
+  }, []);
+
+  const changeTrack = async () => {
+    await axios.post(
+      "https://api.spotify.com/v1/me/player/next",
+      {},
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+    getCurrentTrack();
+  };
+  const pauseMusic = async () => {
+    try {
+      await axios.put(
+        "https://api.spotify.com/v1/me/player/pause",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsPlaying(false);
+    }
+  };
+  const playMusic = async () => {
+    try {
+      await axios.put(
+        "https://api.spotify.com/v1/me/player/play",
+        {},
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsPlaying(true);
+    }
+  };
+  useEffect(() => {
+    getCurrentTrack();
+  }, [token]);
+
+  useEffect(() => {
+    console.log(currentPlaying);
+  }, [currentPlaying]);
   return (
     <div className="bottombar-container">
       <div className="bottombar-user">
@@ -77,7 +161,9 @@ const BottomBar = () => {
           <DialogTrigger type="popover" placement="top" containerPadding={20}>
             <ActionButton staticColor="white" isQuiet>
               <img className="spotify-icon" src={spotifyIcon} alt="spotify" />{" "}
-              <p className="spotify-connect-text">Play Music</p>
+              <p className="spotify-connect-text">
+                {currentPlaying ? currentPlaying.name : "Play Music"}
+              </p>
             </ActionButton>
             <Dialog
               UNSAFE_style={{ backgroundColor: "#212329", border: "none" }}
@@ -111,8 +197,12 @@ const BottomBar = () => {
       {loggedIn && (
         <div className="bottombar-music-controllers">
           <img src={rewindIcon} alt="" />
-          <img src={pauseIcon} alt="" />
-          <img src={forwardIcon} alt="" />
+          {isPlaying ? (
+            <img onClick={pauseMusic} src={pauseIcon} alt="" />
+          ) : (
+            <img onClick={playMusic} src={playIcon} alt="" />
+          )}
+          <img onClick={changeTrack} src={forwardIcon} alt="" />
         </div>
       )}
 
