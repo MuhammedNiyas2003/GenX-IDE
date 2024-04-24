@@ -32,22 +32,38 @@ const userRegister = async (req, res) => {
   const { username, email, password, imageUrl } = req.body;
 
   try {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const isEmailExist = await emailExists(email);
+    if (isEmailExist) {
+      console.log("Email already exist!", isEmailExist);
+      return res.status(409).json("Email alrady exist!");
+    } else {
+      const salt = await bcrypt.genSalt();
+      const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = new User({
-      username,
-      email,
-      password: hashedPassword,
-      imageUrl: imageUrl !== "" ? imageUrl : "",
-      verified: false,
-    });
+      const newUser = new User({
+        username,
+        email,
+        password: hashedPassword,
+        imageUrl: imageUrl !== "" ? imageUrl : "",
+        verified: false,
+      });
 
-    const response = await newUser.save();
-    res.json(response);
+      const response = await newUser.save();
+      return res.status(200).json({ data: response });
+    }
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
 };
 
 export { userLogin, userRegister };
+
+const emailExists = async (email) => {
+  try {
+    const user = await User.findOne({ email: email }).exec();
+    return !!user;
+  } catch (error) {
+    console.error("Error checking email existence:", error);
+    return false;
+  }
+};
