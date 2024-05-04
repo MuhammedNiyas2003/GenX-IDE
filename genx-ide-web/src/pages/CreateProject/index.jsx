@@ -1,5 +1,5 @@
 import "./style.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
 import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -13,6 +13,7 @@ import {
 
 const CreateProject = () => {
   const { email, _id } = useSelector((state) => state.auth.user);
+  const { currentWorkspace } = useSelector((state) => state.workspace);
 
   const [projectName, setProjectName] = useState("");
   const [language, setLanguage] = useState("");
@@ -103,6 +104,13 @@ const CreateProject = () => {
     },
     [navigate]
   );
+
+  useEffect(() => {
+    if (currentWorkspace !== null) {
+      console.log("redirect");
+      navigate(`/workspace/project/${currentWorkspace._id}`);
+    }
+  }, []);
 
   //socket
   useEffect(() => {

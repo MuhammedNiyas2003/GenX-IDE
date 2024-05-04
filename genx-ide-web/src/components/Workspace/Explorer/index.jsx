@@ -1,27 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./style.scss";
 import { DiCss3, DiJavascript, DiNpm } from "react-icons/di";
 import { FaList, FaRegFolder, FaRegFolderOpen } from "react-icons/fa";
 import TreeView from "react-accessible-treeview";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentCode } from "../../../state/reducers/workspaceSlice";
-//adobe spectrum
 import {
-  ActionMenu,
-  Section,
-  Item,
-  MenuTrigger,
-  ActionButton,
-  Menu,
-} from "@adobe/react-spectrum";
-import RightClick from "../ContextMenu";
+  setCurrentCode,
+  setCurrentFile,
+  setFileFolder,
+} from "../../../state/reducers/workspaceSlice";
 import { setPoints } from "../../../state/reducers/contextMenuSlice";
+import axios from "axios";
 
 function Explorer() {
   const dispatch = useDispatch();
 
-  const { fileFolders } = useSelector((state) => state.workspace);
-  const [isVisible, setIsVisible] = useState(true);
+  const { fileFolders, currentWorkspace } = useSelector(
+    (state) => state.workspace
+  );
 
   function flattenStructure(node, idCounter = { value: 0 }, parentId = null) {
     const flatNode = {
@@ -53,9 +49,23 @@ function Explorer() {
     console.log("file", flatStructure);
   }, []);
 
-  const onFileSelect = (element) => {
+  const onFileSelect = async (element) => {
+    console.log("explore update");
+    try {
+      //update fileFolders
+      const response = await axios.get(
+        `${import.meta.env.VITE_SERVER_URL}/api/file-folder/${
+          currentWorkspace?._id
+        }`
+      );
+      dispatch(setFileFolder(response.data.data));
+    } catch (err) {
+      console.log(err);
+    }
     if (element.type === "file") {
-      dispatch(setCurrentCode(element.code));
+      dispatch(setCurrentCode(element?.code));
+      console.log("element clicked", element?.id);
+      dispatch(setCurrentFile(element?.id));
     }
   };
 

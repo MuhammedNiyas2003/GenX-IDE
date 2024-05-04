@@ -16,12 +16,15 @@ import geminiaiRouter from "./routes/geminiai.js";
 import workspaceRouter from "./routes/workspace.js";
 import fileFolderRouter from "./routes/fileFolder.js";
 import invitationRouter from "./routes/invitation.js";
+import exploreRouter from "./routes/explore.js";
 // models
 import User from "./models/User.js";
 import session from "cookie-session";
 //socket
 import { Server } from "socket.io";
 import { createServer } from "http";
+// models
+import FileFolder from "./models/FileFolder.js";
 
 const app = express();
 const server = createServer(app);
@@ -121,7 +124,6 @@ io.on("connection", (socket) => {
   socket.on(
     "mouse-move",
     async ({ mouseX, mouseY, userId, roomId, userName }) => {
-
       // Get all sockets in the room except the sender's socket
       const socketsInRoom = io.sockets.adapter.rooms.get(roomId);
       const socketsExceptSender = socketsInRoom
@@ -139,6 +141,20 @@ io.on("connection", (socket) => {
       });
     }
   );
+  //cloud saving
+  socket.on("cloud-saving", async (data) => {
+    const { id, code } = data;
+    try {
+      const response = await FileFolder.findByIdAndUpdate(
+        id,
+        { code },
+        { new: true }
+      );
+      console.log("Update response:", response?.code);
+    } catch (err) {
+      console.log("Error updating user:", err);
+    }
+  });
 });
 
 //routes
@@ -149,6 +165,7 @@ app.use("/api/geminiai", geminiaiRouter);
 app.use("/api/workspace", workspaceRouter);
 app.use("/api/file-folder", fileFolderRouter);
 app.use("/api/invitation", invitationRouter);
+app.use("/api/explore", exploreRouter);
 
 //db connection
 mongoose.set("strictQuery", true);

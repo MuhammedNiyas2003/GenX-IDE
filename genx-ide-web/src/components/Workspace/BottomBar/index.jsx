@@ -25,6 +25,7 @@ import {
   spotifyIcon,
   playIcon,
 } from "../../../contants/icons";
+import { clearWorkspace } from "../../../state/reducers/workspaceSlice";
 
 const BottomBar = () => {
   const { loggedIn, token } = useSelector((state) => state.spotify);
@@ -36,6 +37,7 @@ const BottomBar = () => {
   const logoutHandler = () => {
     dispatch(setLogout());
     dispatch(setLogoutSpotify());
+    dispatch(clearWorkspace());
   };
 
   const redirect_uri = `${import.meta.env.VITE_CLIENT_URL}/workspace`;

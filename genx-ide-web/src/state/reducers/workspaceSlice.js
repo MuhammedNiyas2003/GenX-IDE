@@ -38,6 +38,7 @@ const workspaceSlice = createSlice({
   name: "workspace",
   initialState: {
     currentCode: defaultBubbleSortCode,
+    currentFile: null,
     currentWorkspace: null,
     fileFolders: null,
   },
@@ -51,9 +52,23 @@ const workspaceSlice = createSlice({
     setFileFolder: (state, action) => {
       state.fileFolders = action.payload;
     },
+    setCurrentFile: (state, action) => {
+      state.currentFile = action.payload;
+    },
+    clearWorkspace: (state, action) => {
+      state.currentCode = defaultBubbleSortCode;
+      state.currentFile = null;
+      state.currentWorkspace = null;
+      state.fileFolders = null;
+    },
   },
 });
 
-export const { setCurrentCode, setCurrentWorkspace, setFileFolder } =
-  workspaceSlice.actions;
+export const {
+  setCurrentCode,
+  setCurrentWorkspace,
+  setFileFolder,
+  setCurrentFile,
+  clearWorkspace,
+} = workspaceSlice.actions;
 export default workspaceSlice.reducer;

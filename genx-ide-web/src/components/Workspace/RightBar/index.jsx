@@ -8,7 +8,7 @@ import ReactPlayer from "react-player";
 //adobe icons
 import ChevronDoubleLeft from "@spectrum-icons/workflow/ChevronDoubleLeft";
 import ChevronDoubleRight from "@spectrum-icons/workflow/ChevronDoubleRight";
-import { ActionButton } from "@adobe/react-spectrum";
+import { ActionButton,Button } from "@adobe/react-spectrum";
 
 const RightBar = () => {
   const windowRef = useRef(null);
@@ -140,12 +140,12 @@ const RightBar = () => {
     <div ref={windowRef} className="rightbar-container">
       <div className="right-bar-toggle">
         {isOpen ? (
-          <ActionButton onClick={() => toggleWindowHandler("close")} isQuiet>
+          <ActionButton onPress={() => toggleWindowHandler("close")} isQuiet>
             <ChevronDoubleRight />
           </ActionButton>
         ) : (
           <>
-            <ActionButton onClick={() => toggleWindowHandler("open")} isQuiet>
+            <ActionButton onPress={() => toggleWindowHandler("open")} isQuiet>
               <ChevronDoubleLeft />
             </ActionButton>
           </>
@@ -153,10 +153,9 @@ const RightBar = () => {
       </div>
 
       <div>
-        <p>Room Page</p>
         <h4>{remoteSocketId ? "Connected" : "No one in room"}</h4>
-        {myStream && <button onClick={sendStreams}>Send Stream</button>}
-        {remoteSocketId && <button onClick={handleCallUser}>CALL</button>}
+        {myStream && <Button onClick={sendStreams}>Send Stream</Button>}
+        {remoteSocketId && <Button onClick={handleCallUser}>CALL</Button>}
         <div className="video-items">
           {myStream && (
             <>
