@@ -134,7 +134,9 @@ const BottomBar = () => {
     }
   };
   useEffect(() => {
-    getCurrentTrack();
+    if (loggedIn) {
+      getCurrentTrack();
+    }
   }, [token]);
 
   useEffect(() => {

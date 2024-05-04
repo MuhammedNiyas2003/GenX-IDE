@@ -110,9 +110,10 @@ const TopBar = () => {
       );
       const { status, data } = response;
       if (status === 201) {
+        console.log(data)
         ToastQueue.positive("Project Published", {
           timeout: 3000,
-          actionLabel: "Go to Explore",
+          actionLabel: "View Project",
           onAction: () => navigate("/explore"),
           shouldCloseOnAction: true,
         });

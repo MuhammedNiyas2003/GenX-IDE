@@ -1,8 +1,6 @@
 import "./style.scss";
 import { navlinks } from "../../contants/data";
 import { NavLink } from "react-router-dom";
-import { Button } from "@adobe/react-spectrum";
-import { logoLight } from "../../contants/icons";
 
 const navStyle = {
   textDecoration: "none",

@@ -38,4 +38,18 @@ const createPost = async (req, res) => {
   }
 };
 
-export { getAllPost, createPost };
+const getUserPosts = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const isUserExist = await User.findById(userId);
+    if (isUserExist) {
+      const userPost = await Explore.find({ userId });
+      console.log(userPost);
+      return res.status(200).json(userPost);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getAllPost, createPost, getUserPosts };

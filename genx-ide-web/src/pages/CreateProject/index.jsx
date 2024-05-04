@@ -107,7 +107,6 @@ const CreateProject = () => {
 
   useEffect(() => {
     if (currentWorkspace !== null) {
-      console.log("redirect");
       navigate(`/workspace/project/${currentWorkspace._id}`);
     }
   }, []);
