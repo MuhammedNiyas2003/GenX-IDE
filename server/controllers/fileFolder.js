@@ -80,5 +80,16 @@ const createFileFolder = async (req, res) => {
     console.log(error);
   }
 };
+const deleteFileFolder = async (req, res) => {
+  const { fileFolderId } = req.params;
+  try {
+    const deletedFileFolder = await FileFolder.deleteOne({ _id: fileFolderId });
+    if (deletedFileFolder) {
+      res.status(202).json("Deleted successfully");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export { getFileFolders, createFileFolder };
+export { getFileFolders, createFileFolder, deleteFileFolder };

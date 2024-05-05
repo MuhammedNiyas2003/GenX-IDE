@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import "./style.scss";
+import axios from "axios";
+// react icons 
 import { DiCss3, DiJavascript, DiNpm } from "react-icons/di";
 import { FaList, FaRegFolder, FaRegFolderOpen } from "react-icons/fa";
 import TreeView from "react-accessible-treeview";
+//redux
 import { useDispatch, useSelector } from "react-redux";
 import {
   setCurrentCode,
@@ -10,7 +13,6 @@ import {
   setFileFolder,
 } from "../../../state/reducers/workspaceSlice";
 import { setPoints } from "../../../state/reducers/contextMenuSlice";
-import axios from "axios";
 
 function Explorer() {
   const dispatch = useDispatch();

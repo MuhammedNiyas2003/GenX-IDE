@@ -25,6 +25,11 @@ import Header from "../../components/Header/index.jsx";
 import InputBox from "../../components/Form/InputBox/index.jsx";
 
 const Settings = () => {
+  const { currentWorkspace: workspace } = useSelector(
+    (state) => state.workspace
+  );
+  const { _id, name: fromName } = useSelector((state) => state.auth.user);
+
   const [name, setName] = useState("Student Guard");
   const [desc, setDesc] = useState("Lorem ipsum dolor sit amet.");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
@@ -32,11 +37,6 @@ const Settings = () => {
   const [inviteEmail, setInviteEmail] = useState("");
 
   const [isUpdating, setIsUpdating] = useState(false);
-
-  const { currentWorkspace: workspace } = useSelector(
-    (state) => state.workspace
-  );
-  const { _id, name: fromName } = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     setName(workspace.name);
@@ -54,7 +54,7 @@ const Settings = () => {
     try {
       setIsUpdating(true);
       const response = await axios.put(
-        `${import.meta.env.VITE_SERVER_URL}/api/workspace/${workspace._id}`,
+        `${import.meta.env.VITE_SERVER_URL}/api/workspace/${workspace?._id}`,
         updateData
       );
       const { status, data } = response.data;
@@ -89,6 +89,10 @@ const Settings = () => {
     }
   };
 
+  useEffect(() => {
+   console.log(name)
+  }, [name])
+  
   return (
     <div className="settings-container">
       <Header leftItem={<Heading level={3}>Settings</Heading>} />
